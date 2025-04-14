@@ -1,5 +1,6 @@
 import 'package:disney/playback/ui/scrub_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:video_player/video_player.dart';
 
 class PlaybackPage extends StatefulWidget {
@@ -46,20 +47,7 @@ class _PlaybackPageState extends State<PlaybackPage> {
           ),
         ],
       ),
-      body:
-          // _controller.value.isInitialized
-          //     ? AspectRatio(
-          //         aspectRatio: _controller.value.aspectRatio,
-          //         child: Stack(
-          //             fit: StackFit.expand,
-          //             alignment: Alignment.bottomCenter,
-          //             children: [
-          //               VideoPlayer(_controller),
-          //               VideoPlayerControls(controller: _controller),
-          //             ]),
-          //       )
-          //     : CircularProgressIndicator(),
-          Stack(
+      body: Stack(
         alignment: Alignment.bottomCenter,
         children: [
           Center(
@@ -87,7 +75,7 @@ class VideoPlayerControls extends StatefulWidget {
 }
 
 class _VideoPlayerControlsState extends State<VideoPlayerControls> {
-  final Duration seekDuration = const Duration(seconds: 10);
+  final Duration seekDuration = const Duration(seconds: 5);
   late final controller = widget.controller;
 
   _VideoPlayerControlsState() {
@@ -124,14 +112,20 @@ class _VideoPlayerControlsState extends State<VideoPlayerControls> {
     widget.controller.seekTo(widget.controller.value.position - seekDuration);
   }
 
+  void togglePlayback() {
+    if (controller.value.isPlaying) {
+      pause();
+    } else {
+      play();
+    }
+  }
+
   void pause() {
     widget.controller.pause();
-    //onPause?.call();
   }
 
   void play() {
     widget.controller.play();
-    //onPlay?.call();
   }
 
   String get remainingTime {
@@ -143,37 +137,98 @@ class _VideoPlayerControlsState extends State<VideoPlayerControls> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: [
-          ScrubBar(
-            controller: widget.controller,
+    return FocusableActionDetector(
+      autofocus: true,
+      shortcuts: {
+        SingleActivator(LogicalKeyboardKey.escape): const DismissIntent(),
+        SingleActivator(LogicalKeyboardKey.arrowLeft): const RewindIntent(),
+        SingleActivator(LogicalKeyboardKey.arrowRight): const ForwardIntent(),
+        SingleActivator(LogicalKeyboardKey.space): const PlayPauseIntent(),
+        SingleActivator(LogicalKeyboardKey.arrowUp):
+            const IncreaseVolumeIntent(),
+        SingleActivator(LogicalKeyboardKey.arrowDown):
+            const DecreaseVolumeIntent(),
+      },
+      actions: {
+        DismissIntent: CallbackAction<DismissIntent>(
+          onInvoke: (intent) => Navigator.of(context).pop(),
+        ),
+        RewindIntent: CallbackAction<RewindIntent>(
+          onInvoke: (intent) => rewind(),
+        ),
+        ForwardIntent: CallbackAction<ForwardIntent>(
+          onInvoke: (intent) => forward(),
+        ),
+        PlayPauseIntent: CallbackAction<PlayPauseIntent>(
+          onInvoke: (intent) => togglePlayback(),
+        ),
+        IncreaseVolumeIntent: CallbackAction<IncreaseVolumeIntent>(
+          onInvoke: (intent) => changeVolume(
+            (controller.value.volume + 0.1).clamp(0.0, 1.0),
           ),
-          IconButton(
-            icon: Icon(
-                size: 40,
-                controller.value.isPlaying ? Icons.pause : Icons.play_arrow),
-            onPressed: () {
-              if (controller.value.isPlaying) {
-                controller.pause();
-              } else {
-                controller.play();
-              }
-            },
+        ),
+        DecreaseVolumeIntent: CallbackAction<DecreaseVolumeIntent>(
+          onInvoke: (intent) => changeVolume(
+            (controller.value.volume - 0.1).clamp(0.0, 1.0),
           ),
-          SizedBox(
-            height: 16,
-          ),
-          // IconButton(
-          //   icon: const Icon(Icons.stop),
-          //   onPressed: () {
-          //     controller.seekTo(Duration.zero);
-          //     controller.pause();
-          //   },
-          // ),
-        ],
+        ),
+      },
+      child: SafeArea(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            ScrubBar(
+              controller: widget.controller,
+            ),
+            IconButton(
+              icon: Icon(
+                  size: 40,
+                  controller.value.isPlaying ? Icons.pause : Icons.play_arrow),
+              onPressed: () {
+                if (controller.value.isPlaying) {
+                  controller.pause();
+                } else {
+                  controller.play();
+                }
+              },
+            ),
+            SizedBox(
+              height: 16,
+            ),
+            // IconButton(
+            //   icon: const Icon(Icons.stop),
+            //   onPressed: () {
+            //     controller.seekTo(Duration.zero);
+            //     controller.pause();
+            //   },
+            // ),
+          ],
+        ),
       ),
     );
   }
+}
+
+class RewindIntent extends Intent {
+  const RewindIntent();
+}
+
+class ForwardIntent extends Intent {
+  const ForwardIntent();
+}
+
+class PlayPauseIntent extends Intent {
+  const PlayPauseIntent();
+}
+
+class IncreaseVolumeIntent extends Intent {
+  const IncreaseVolumeIntent();
+}
+
+class DecreaseVolumeIntent extends Intent {
+  const DecreaseVolumeIntent();
+}
+
+class DismissIntent extends Intent {
+  const DismissIntent();
 }
