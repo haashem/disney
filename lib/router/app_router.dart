@@ -1,7 +1,9 @@
 import 'package:disney/home_page.dart';
+import 'package:disney/movies/movie.dart';
 import 'package:disney/playback/ui/playback_page.dart';
 import 'package:disney/profile_selection_page.dart';
 import 'package:disney/search_page.dart';
+import 'package:disney/show_page.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -9,6 +11,7 @@ class AppRouter {
   static const String profileSelection = 'profile-selection';
   static const String home = 'browse';
   static const String playback = 'playback';
+  static const String showPage = 'showpage';
   static const String search = 'search';
   static const String watchlist = 'watchlist';
 
@@ -28,13 +31,20 @@ class AppRouter {
           },
         ),
         GoRoute(
+            path: showPage,
+            builder: (BuildContext context, GoRouterState state) {
+              return ShowPage(
+                movie: categories.first.movies.first,
+              );
+            }),
+        GoRoute(
           path: playback,
           builder: (BuildContext context, GoRouterState state) {
             return const PlaybackPage();
           },
         ),
         GoRoute(
-          path: playback,
+          path: search,
           builder: (BuildContext context, GoRouterState state) {
             return const SearchPage();
           },

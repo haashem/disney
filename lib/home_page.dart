@@ -1,3 +1,4 @@
+import 'package:disney/router/app_router.dart';
 import 'package:disney/side_menu.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -20,7 +21,7 @@ class HomePage extends StatelessWidget {
                     itemCount: 15,
                     scrollDirection: Axis.horizontal,
                     itemBuilder: (context, index) => ElevatedButton(
-                      onPressed: () => context.go('/playback'),
+                      onPressed: () => context.go('/showpage'),
                       child: Center(
                         child: Text(
                           'Item $index',
