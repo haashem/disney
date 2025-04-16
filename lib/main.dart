@@ -18,6 +18,33 @@ class DisneyApp extends StatelessWidget {
         showValueIndicator: ShowValueIndicator.always,
         valueIndicatorColor: Colors.white,
       ),
+      filledButtonTheme: FilledButtonThemeData(
+        style: ButtonStyle(
+          backgroundColor: WidgetStateProperty.resolveWith((states) {
+            if (states.contains(WidgetState.focused)) {
+              return Colors.white;
+            }
+            return Colors.white10;
+          }),
+          foregroundColor: WidgetStateProperty.resolveWith((states) {
+            if (states.contains(WidgetState.focused)) {
+              return Colors.black;
+            }
+            return Colors.white;
+          }),
+          padding: WidgetStatePropertyAll(
+            const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+          ),
+          minimumSize: WidgetStatePropertyAll(
+            const Size(100, 52),
+          ),
+          shape: WidgetStatePropertyAll(
+            RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(8),
+            ),
+          ),
+        ),
+      ),
       iconButtonTheme: IconButtonThemeData(
         style: ButtonStyle(
           // foregroundColor: WidgetStatePropertyAll(Colors.white),
