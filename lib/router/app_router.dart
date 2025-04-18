@@ -1,4 +1,4 @@
-import 'package:disney/home_page.dart';
+import 'package:disney/home_page/home_page.dart';
 import 'package:disney/movies/movie.dart';
 import 'package:disney/playback/ui/playback_page.dart';
 import 'package:disney/profile_selection_page.dart';

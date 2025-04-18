@@ -19,6 +19,7 @@ class _SideMenuState extends State<SideMenu> {
         });
       },
       child: AnimatedContainer(
+        curve: Curves.easeOut,
         duration: const Duration(milliseconds: 300),
         width: isFocused ? 240 : 66,
         padding: const EdgeInsets.all(16.0),

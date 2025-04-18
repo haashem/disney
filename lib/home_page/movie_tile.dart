@@ -1,0 +1,72 @@
+import 'package:disney/movies/movie.dart';
+import 'package:flutter/material.dart';
+
+class MovieTile extends StatefulWidget {
+  final VoidCallback onPressed;
+  final Movie movie;
+
+  const MovieTile({
+    super.key,
+    required this.movie,
+    required this.onPressed,
+  });
+
+  @override
+  State<MovieTile> createState() => _MovieTileState();
+}
+
+class _MovieTileState extends State<MovieTile> {
+  bool isFocused = false;
+  bool isHovered = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return AnimatedScale(
+      scale: isFocused || isHovered ? 1.05 : 1,
+      duration: Duration(milliseconds: 300),
+      child: ElevatedButton(
+        clipBehavior: Clip.hardEdge,
+        onHover: (value) => setState(() {
+          isHovered = value;
+        }),
+        onFocusChange: (value) => setState(() {
+          isFocused = value;
+        }),
+        onPressed: widget.onPressed,
+        style: ButtonStyle(
+          padding: WidgetStatePropertyAll(
+            const EdgeInsets.all(0),
+          ),
+          fixedSize: WidgetStatePropertyAll(
+            const Size(230, 130),
+          ),
+          shape: WidgetStatePropertyAll(
+            RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(8),
+            ),
+          ),
+          side: WidgetStateProperty.resolveWith((states) {
+            if (states.contains(WidgetState.focused)) {
+              return const BorderSide(
+                color: Colors.white,
+                width: 2,
+              );
+            }
+            return null;
+          }),
+          // backgroundBuilder: (context, states, child) {
+          //   return AnimatedScale(
+          //     scale: states.contains(WidgetState.focused) ? 1.2 : 1,
+          //     duration: Duration(milliseconds: 300),
+          //     child: child!,
+          //   );
+          // },
+        ),
+        child: Image.asset(
+          widget.movie.tileImageUrl,
+          fit: BoxFit.cover,
+        ),
+      ),
+    );
+  }
+}

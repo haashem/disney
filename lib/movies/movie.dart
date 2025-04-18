@@ -1,9 +1,9 @@
 class CategorizedMovie {
-  final String category;
+  final String title;
   final List<Movie> movies;
 
   CategorizedMovie({
-    required this.category,
+    required this.title,
     required this.movies,
   });
 }
@@ -27,7 +27,7 @@ class Movie {
 }
 
 final List<CategorizedMovie> categories = [
-  CategorizedMovie(category: 'Because You Watched', movies: [
+  CategorizedMovie(title: 'Because You Watched', movies: [
     Movie(
         title: 'Primal Survivor',
         yearAndCategory: '2014 – 2020 • 5 Seasons • Reality, Docuserie',
