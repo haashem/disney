@@ -31,7 +31,7 @@ class _SideMenuState extends State<SideMenu> {
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          spacing: 24,
+          spacing: 32,
           children: [
             _SideMenuButton.search(
               isSelected: false,

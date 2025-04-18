@@ -13,7 +13,7 @@ class HomePage extends StatelessWidget {
           Row(
             children: [
               SizedBox(
-                width: 80,
+                width: 66,
               ),
               Expanded(
                 child: Column(
