@@ -35,18 +35,19 @@ class _PlaybackPageState extends State<PlaybackPage> {
     return Scaffold(
       extendBodyBehindAppBar: true,
       backgroundColor: Colors.black,
-      appBar: AppBar(
-        title: const Text('Playback'),
-        backgroundColor: Colors.transparent,
-        elevation: 10,
-        shadowColor: Colors.black,
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.more_vert),
-            onPressed: () {},
-          ),
-        ],
-      ),
+      // appBar:
+      // AppBar(
+      //   title: const Text('Playback'),
+      //   backgroundColor: Colors.transparent,
+      //   elevation: 10,
+      //   shadowColor: Colors.black,
+      //   actions: [
+      //     IconButton(
+      //       icon: const Icon(Icons.more_vert),
+      //       onPressed: () {},
+      //     ),
+      //   ],
+      // ),
       body: Stack(
         alignment: Alignment.bottomCenter,
         children: [

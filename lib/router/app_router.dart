@@ -17,7 +17,9 @@ class AppRouter {
 
   // Add more routes as needed
 
-  static final GoRouter router = GoRouter(routes: <RouteBase>[
+  static final GoRouter router = GoRouter(
+    debugLogDiagnostics: true,
+    routes: <RouteBase>[
     GoRoute(
       path: '/',
       builder: (BuildContext context, GoRouterState state) {
@@ -36,13 +38,15 @@ class AppRouter {
               return ShowPage(
                 movie: categories.first.movies.first,
               );
-            }),
-        GoRoute(
-          path: playback,
-          builder: (BuildContext context, GoRouterState state) {
-            return const PlaybackPage();
-          },
-        ),
+            },
+            routes: [
+              GoRoute(
+                path: playback,
+                builder: (BuildContext context, GoRouterState state) {
+                  return const PlaybackPage();
+                },
+              ),
+            ]),
         GoRoute(
           path: search,
           builder: (BuildContext context, GoRouterState state) {

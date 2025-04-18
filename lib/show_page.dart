@@ -1,6 +1,7 @@
 import 'package:disney/movies/movie.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:go_router/go_router.dart';
 
 class ShowPage extends StatelessWidget {
   final Movie movie;
@@ -58,7 +59,7 @@ class ShowPage extends StatelessWidget {
                       children: [
                         FilledButton(
                           autofocus: true,
-                          onPressed: () {},
+                          onPressed: () => context.go('/showpage/playback'),
                           child: const Text('Play'),
                         ),
                         const SizedBox(width: 16),

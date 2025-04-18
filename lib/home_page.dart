@@ -1,5 +1,4 @@
-import 'package:disney/router/app_router.dart';
-import 'package:disney/side_menu.dart';
+import 'package:disney/side_menu/side_menu.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -9,55 +8,62 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
-      child: Row(
+      child: Stack(
         children: [
-          SideMenu(),
-          Expanded(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Expanded(
-                  child: ListView.separated(
-                    itemCount: 15,
-                    scrollDirection: Axis.horizontal,
-                    itemBuilder: (context, index) => ElevatedButton(
-                      onPressed: () => context.go('/showpage'),
-                      child: Center(
-                        child: Text(
-                          'Item $index',
-                          style: const TextStyle(color: Colors.white),
-                        ),
-                      ),
-                    ),
-                    separatorBuilder: (context, index) => SizedBox(
-                      width: 16,
-                    ),
-                  ),
-                ),
-                Expanded(
-                  child: ListView.separated(
-                    itemCount: 15,
-                    scrollDirection: Axis.horizontal,
-                    itemBuilder: (context, index) => ElevatedButton(
-                      onPressed: () {},
-                      child: SizedBox(
-                        width: 150,
-                        child: Center(
-                          child: Text(
-                            'Item $index',
-                            style: const TextStyle(color: Colors.white),
+          Row(
+            children: [
+              SizedBox(
+                width: 80,
+              ),
+              Expanded(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Expanded(
+                      child: ListView.separated(
+                        itemCount: 15,
+                        scrollDirection: Axis.horizontal,
+                        itemBuilder: (context, index) => ElevatedButton(
+                          onPressed: () => context.go('/showpage'),
+                          child: Center(
+                            child: Text(
+                              'Item $index',
+                              style: const TextStyle(color: Colors.white),
+                            ),
                           ),
                         ),
+                        separatorBuilder: (context, index) => SizedBox(
+                          width: 16,
+                        ),
                       ),
                     ),
-                    separatorBuilder: (context, index) => SizedBox(
-                      width: 16,
-                    ),
-                  ),
-                )
-              ],
-            ),
+                    Expanded(
+                      child: ListView.separated(
+                        itemCount: 15,
+                        scrollDirection: Axis.horizontal,
+                        itemBuilder: (context, index) => ElevatedButton(
+                          onPressed: () {},
+                          child: SizedBox(
+                            width: 150,
+                            child: Center(
+                              child: Text(
+                                'Item $index',
+                                style: const TextStyle(color: Colors.white),
+                              ),
+                            ),
+                          ),
+                        ),
+                        separatorBuilder: (context, index) => SizedBox(
+                          width: 16,
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+              ),
+            ],
           ),
+          SideMenu(),
         ],
       ),
     );
