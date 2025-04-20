@@ -1,3 +1,4 @@
+import 'package:disney/home_page/browse_traversal_policy.dart';
 import 'package:disney/home_page/section_list.dart';
 import 'package:disney/movies/movie.dart';
 import 'package:disney/side_menu/side_menu.dart';
@@ -16,22 +17,25 @@ class HomePage extends StatelessWidget {
               SizedBox(
                 width: 74,
               ),
-              Expanded(
-                child: CustomScrollView(
-                  physics: const BouncingScrollPhysics(),
-                  slivers: [
-                    SliverList.separated(
-                        itemCount: 2,
-                        separatorBuilder: (context, index) => const SizedBox(
-                              height: 24,
-                            ),
-                        itemBuilder: (context, index) {
-                          return SectionList(
-                            title: categories.first.title,
-                            movies: categories.first.movies,
-                          );
-                        }),
-                  ],
+              FocusTraversalGroup(
+                policy: BrowseTraversalPolicy(),
+                child: Expanded(
+                  child: CustomScrollView(
+                    physics: const BouncingScrollPhysics(),
+                    slivers: [
+                      SliverList.separated(
+                          itemCount: 2,
+                          separatorBuilder: (context, index) => const SizedBox(
+                                height: 24,
+                              ),
+                          itemBuilder: (context, index) {
+                            return SectionList(
+                              title: categories.first.title,
+                              movies: categories.first.movies,
+                            );
+                          }),
+                    ],
+                  ),
                 ),
               ),
             ],

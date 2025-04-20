@@ -1,3 +1,4 @@
+import 'package:disney/home_page/horizintal_list_focust_traversal_policy.dart';
 import 'package:disney/home_page/movie_tile.dart';
 import 'package:disney/movies/movie.dart';
 import 'package:flutter/material.dart';
@@ -6,8 +7,13 @@ import 'package:go_router/go_router.dart';
 class SectionList extends StatelessWidget {
   final String title;
   final List<Movie> movies;
+  // Create focus nodes for each movie tile.
+  late final List<FocusNode> movieFocusNodes = List.generate(
+    movies.length,
+    (index) => FocusNode(debugLabel: 'MovieTile $index'),
+  );
 
-  const SectionList({
+  SectionList({
     super.key,
     required this.title,
     required this.movies,
@@ -28,11 +34,12 @@ class SectionList extends StatelessWidget {
         SizedBox(
           height: 132,
           child: ListView.separated(
-            itemCount: 3,
+            itemCount: movies.length,
             scrollDirection: Axis.horizontal,
             clipBehavior: Clip.none,
             itemBuilder: (context, index) => MovieTile(
               movie: movies[0],
+              focusNode: movieFocusNodes[index],
               onPressed: () => context.go('/showpage'),
             ),
             separatorBuilder: (context, index) => SizedBox(

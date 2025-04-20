@@ -37,6 +37,30 @@ final List<CategorizedMovie> categories = [
         tileImageUrl: 'assets/images/primal-survivor/tile.webp',
         titleImageUrl: 'assets/images/primal-survivor/title.webp'),
     Movie(
+        title: 'Primal Survivor',
+        yearAndCategory: '2014 – 2020 • 5 Seasons • Reality, Docuserie',
+        description:
+            'Hazen Audel relives his most thrilling moments and reveals what it takes to become Primal Survivor.',
+        coverImageUrl: 'assets/images/primal-survivor/cover.webp',
+        tileImageUrl: 'assets/images/primal-survivor/tile.webp',
+        titleImageUrl: 'assets/images/primal-survivor/title.webp'),
+    Movie(
+        title: 'Primal Survivor',
+        yearAndCategory: '2014 – 2020 • 5 Seasons • Reality, Docuserie',
+        description:
+            'Hazen Audel relives his most thrilling moments and reveals what it takes to become Primal Survivor.',
+        coverImageUrl: 'assets/images/primal-survivor/cover.webp',
+        tileImageUrl: 'assets/images/primal-survivor/tile.webp',
+        titleImageUrl: 'assets/images/primal-survivor/title.webp'),
+    Movie(
+        title: 'Primal Survivor',
+        yearAndCategory: '2014 – 2020 • 5 Seasons • Reality, Docuserie',
+        description:
+            'Hazen Audel relives his most thrilling moments and reveals what it takes to become Primal Survivor.',
+        coverImageUrl: 'assets/images/primal-survivor/cover.webp',
+        tileImageUrl: 'assets/images/primal-survivor/tile.webp',
+        titleImageUrl: 'assets/images/primal-survivor/title.webp'),
+    Movie(
         title: 'Running Wild with Bear Grylls',
         yearAndCategory:
             '2014 – 2021 • 2 Seasons • Action and Adventure, Reality',

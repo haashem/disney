@@ -4,10 +4,12 @@ import 'package:flutter/material.dart';
 class MovieTile extends StatefulWidget {
   final VoidCallback onPressed;
   final Movie movie;
+  final FocusNode? focusNode;
 
   const MovieTile({
     super.key,
     required this.movie,
+    required this.focusNode,
     required this.onPressed,
   });
 
@@ -26,6 +28,7 @@ class _MovieTileState extends State<MovieTile> {
       duration: Duration(milliseconds: 300),
       child: ElevatedButton(
         clipBehavior: Clip.hardEdge,
+        focusNode: widget.focusNode,
         onHover: (value) => setState(() {
           isHovered = value;
         }),
