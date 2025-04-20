@@ -10,7 +10,6 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Material(
       child: Stack(
-        // fit: StackFit.expand,
         children: [
           Row(
             children: [
@@ -37,9 +36,41 @@ class HomePage extends StatelessWidget {
               ),
             ],
           ),
-          SideMenu(),
+          SideMenu()
+          // FocusScope(
+          //     debugLabel: 'SideMenuScope',
+          //     onKeyEvent: (node, event) {
+          //       if (event.logicalKey == LogicalKeyboardKey.arrowLeft ||
+          //           event.logicalKey == LogicalKeyboardKey.arrowRight) {
+          //         final x = node.focusInDirection(TraversalDirection.right);
+          //         node.
+          //         print(x);
+          //         return KeyEventResult.handled;
+          //       }
+
+          //       return KeyEventResult.ignored;
+          //     },
+          //     child: SideMenu()),
         ],
       ),
     );
   }
 }
+
+// /// An [Action] that moves the focus to the focusable node in the direction
+// /// configured by the associated [DirectionalFocusIntent.direction].
+// ///
+// /// This is the [Action] associated with [DirectionalFocusIntent] and bound by
+// /// default to the [LogicalKeyboardKey.arrowUp], [LogicalKeyboardKey.arrowDown],
+// /// [LogicalKeyboardKey.arrowLeft], and [LogicalKeyboardKey.arrowRight] keys in
+// /// the [WidgetsApp], with the appropriate associated directions.
+// class DirectionalFocusAction2 extends Action<DirectionalFocusIntent> {
+//   /// Creates a [DirectionalFocusAction].
+//   DirectionalFocusAction2();
+
+//   @override
+//   void invoke(DirectionalFocusIntent intent) {
+//     print(intent);
+//     primaryFocus!.focusInDirection(intent.direction);
+//   }
+// }

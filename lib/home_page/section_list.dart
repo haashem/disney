@@ -28,7 +28,7 @@ class SectionList extends StatelessWidget {
         SizedBox(
           height: 132,
           child: ListView.separated(
-            itemCount: 15,
+            itemCount: 3,
             scrollDirection: Axis.horizontal,
             clipBehavior: Clip.none,
             itemBuilder: (context, index) => MovieTile(

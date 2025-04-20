@@ -1,3 +1,5 @@
+import 'package:disney/side_menu/side_menu_focus_traversal_policy.dart';
+import 'package:disney/side_menu/side_menu_focus_traversal_policy2.dart';
 import 'package:flutter/material.dart';
 
 class SideMenu extends StatefulWidget {
@@ -9,52 +11,63 @@ class SideMenu extends StatefulWidget {
 
 class _SideMenuState extends State<SideMenu> {
   bool isFocused = false;
+  final List<FocusNode> sideMenuNodes = List.generate(
+    4,
+    (index) => FocusNode(debugLabel: 'SideMenuItem $index'),
+  );
   @override
   Widget build(BuildContext context) {
     return Focus(
       skipTraversal: true,
+      debugLabel: 'SideMenu',
       onFocusChange: (isFocused) {
         setState(() {
           this.isFocused = isFocused;
         });
       },
-      child: AnimatedContainer(
-        curve: Curves.easeOut,
-        duration: const Duration(milliseconds: 300),
-        width: isFocused ? 240 : 66,
-        padding: const EdgeInsets.all(16.0),
-        decoration: BoxDecoration(
-          gradient: LinearGradient(colors: [
-            Color(0xff141414),
-            Color(0xff141414),
-            // Colors.transparent,
-          ]),
-        ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          spacing: 32,
-          children: [
-            _SideMenuButton.search(
-              isSelected: false,
-              showLabel: isFocused,
-              onPressed: () {},
-            ),
-            _SideMenuButton.home(
-              isSelected: false,
-              showLabel: isFocused,
-              onPressed: () {},
-            ),
-            _SideMenuButton.watchlist(
-              isSelected: false,
-              showLabel: isFocused,
-              onPressed: () {},
-            ),
-            _SideMenuButton.settings(
-              isSelected: false,
-              showLabel: isFocused,
-              onPressed: () {},
-            ),
-          ],
+      child: FocusTraversalGroup(
+        policy: SideMenuFocusTraversalPolicy2(sideMenuNodes: sideMenuNodes),
+        child: AnimatedContainer(
+          curve: Curves.easeOut,
+          duration: const Duration(milliseconds: 300),
+          width: isFocused ? 240 : 66,
+          padding: const EdgeInsets.all(16.0),
+          decoration: BoxDecoration(
+            gradient: LinearGradient(colors: [
+              Color(0xff141414),
+              Color(0xff141414),
+            ]),
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            spacing: 32,
+            children: [
+              _SideMenuButton.search(
+                isSelected: false,
+                showLabel: isFocused,
+                focusNode: sideMenuNodes[0],
+                onPressed: () {},
+              ),
+              _SideMenuButton.home(
+                isSelected: false,
+                showLabel: isFocused,
+                focusNode: sideMenuNodes[1],
+                onPressed: () {},
+              ),
+              _SideMenuButton.watchlist(
+                isSelected: false,
+                showLabel: isFocused,
+                focusNode: sideMenuNodes[2],
+                onPressed: () {},
+              ),
+              _SideMenuButton.settings(
+                isSelected: false,
+                showLabel: isFocused,
+                focusNode: sideMenuNodes[3],
+                onPressed: () {},
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -67,11 +80,13 @@ class _SideMenuButton extends StatefulWidget {
   final IconData icon;
   final String label;
   final bool showLabel;
+  final FocusNode focusNode;
 
   const _SideMenuButton.search({
     required this.onPressed,
     this.isSelected = false,
     this.showLabel = false,
+    required this.focusNode,
   })  : icon = Icons.search,
         label = 'SEARCH';
 
@@ -79,6 +94,7 @@ class _SideMenuButton extends StatefulWidget {
     required this.onPressed,
     this.isSelected = false,
     this.showLabel = true,
+    required this.focusNode,
   })  : icon = Icons.home,
         label = 'HOME';
 
@@ -86,6 +102,7 @@ class _SideMenuButton extends StatefulWidget {
     required this.onPressed,
     this.isSelected = false,
     this.showLabel = false,
+    required this.focusNode,
   })  : icon = Icons.add,
         label = 'WATCHLIST';
 
@@ -93,6 +110,7 @@ class _SideMenuButton extends StatefulWidget {
     required this.onPressed,
     this.isSelected = false,
     this.showLabel = false,
+    required this.focusNode,
   })  : icon = Icons.settings,
         label = 'SETTINGS';
 
@@ -133,6 +151,7 @@ class _SideMenuButtonState extends State<_SideMenuButton> {
         ),
         TextButton(
           onPressed: widget.onPressed,
+          focusNode: widget.focusNode,
           style: ButtonStyle(
             padding: WidgetStateProperty.resolveWith((states) {
               return showLabel
