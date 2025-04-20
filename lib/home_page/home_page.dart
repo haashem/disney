@@ -1,4 +1,5 @@
 import 'package:disney/home_page/browse_traversal_policy.dart';
+import 'package:disney/home_page/carousel/carousel.dart';
 import 'package:disney/home_page/section_list.dart';
 import 'package:disney/movies/movie.dart';
 import 'package:disney/side_menu/side_menu.dart';
@@ -18,11 +19,18 @@ class HomePage extends StatelessWidget {
                 width: 74,
               ),
               FocusTraversalGroup(
-                policy: BrowseTraversalPolicy(),
+               // policy: BrowseTraversalPolicy(),
                 child: Expanded(
                   child: CustomScrollView(
                     physics: const BouncingScrollPhysics(),
+                    clipBehavior: Clip.none,
                     slivers: [
+                      SliverPadding(padding: EdgeInsets.all(16)),
+                      SliverToBoxAdapter(
+                        child: Carousel(
+                          movies: categories.first.movies,
+                        ),
+                      ),
                       SliverList.separated(
                           itemCount: 2,
                           separatorBuilder: (context, index) => const SizedBox(
@@ -34,6 +42,7 @@ class HomePage extends StatelessWidget {
                               movies: categories.first.movies,
                             );
                           }),
+                      SliverPadding(padding: EdgeInsets.all(16))
                     ],
                   ),
                 ),

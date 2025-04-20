@@ -57,13 +57,6 @@ class _MovieTileState extends State<MovieTile> {
             }
             return null;
           }),
-          // backgroundBuilder: (context, states, child) {
-          //   return AnimatedScale(
-          //     scale: states.contains(WidgetState.focused) ? 1.2 : 1,
-          //     duration: Duration(milliseconds: 300),
-          //     child: child!,
-          //   );
-          // },
         ),
         child: Image.asset(
           widget.movie.tileImageUrl,
