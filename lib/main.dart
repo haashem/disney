@@ -11,8 +11,8 @@ class DisneyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ThemeData themeData = ThemeData.dark();
-
     themeData = themeData.copyWith(
+      scaffoldBackgroundColor: Color(0xFF1a1c28),
       sliderTheme: SliderThemeData(
         valueIndicatorShape: RectangularSliderValueIndicatorShape(),
         showValueIndicator: ShowValueIndicator.always,

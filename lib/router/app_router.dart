@@ -1,4 +1,4 @@
-import 'package:disney/home_page/home_page.dart';
+import 'package:disney/home_page/home_page_scaffold.dart';
 import 'package:disney/movies/movie.dart';
 import 'package:disney/playback/ui/playback_page.dart';
 import 'package:disney/profile_selection_page.dart';
@@ -17,13 +17,12 @@ class AppRouter {
 
   // Add more routes as needed
 
-  static final GoRouter router = GoRouter(
-    debugLogDiagnostics: true,
-    routes: <RouteBase>[
+  static final GoRouter router =
+      GoRouter(debugLogDiagnostics: true, routes: <RouteBase>[
     GoRoute(
       path: '/',
       builder: (BuildContext context, GoRouterState state) {
-        return const HomePage();
+        return const HomePageScaffold();
       },
       routes: <RouteBase>[
         GoRoute(

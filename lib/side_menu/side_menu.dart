@@ -1,9 +1,9 @@
-import 'package:disney/side_menu/side_menu_focus_traversal_policy.dart';
 import 'package:disney/side_menu/side_menu_focus_traversal_policy2.dart';
 import 'package:flutter/material.dart';
 
 class SideMenu extends StatefulWidget {
-  const SideMenu({super.key});
+  final ValueChanged<int> onItemSelected;
+  const SideMenu({super.key, required this.onItemSelected});
 
   @override
   State<SideMenu> createState() => _SideMenuState();
@@ -11,19 +11,31 @@ class SideMenu extends StatefulWidget {
 
 class _SideMenuState extends State<SideMenu> {
   bool isFocused = false;
+  int selectedIndex = 1;
+  final FocusNode focusNode = FocusNode(debugLabel: 'SideMenu Focus Node');
   final List<FocusNode> sideMenuNodes = List.generate(
     4,
     (index) => FocusNode(debugLabel: 'SideMenuItem $index'),
   );
+
+  void itemSelected(int index) {
+    selectedIndex = index;
+    widget.onItemSelected(index);
+    focusNode.unfocus();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Focus(
-      skipTraversal: true,
-      debugLabel: 'SideMenu',
+      skipTraversal: false,
+      focusNode: focusNode,
       onFocusChange: (isFocused) {
         setState(() {
           this.isFocused = isFocused;
         });
+        if (isFocused) {
+          sideMenuNodes[selectedIndex].requestFocus();
+        }
       },
       child: FocusTraversalGroup(
         policy: SideMenuFocusTraversalPolicy2(sideMenuNodes: sideMenuNodes),
@@ -33,10 +45,15 @@ class _SideMenuState extends State<SideMenu> {
           width: isFocused ? 240 : 66,
           padding: const EdgeInsets.all(16.0),
           decoration: BoxDecoration(
-            gradient: LinearGradient(colors: [
-              Color(0xff141414),
-              Color(0xff141414),
-            ]),
+            color: Color(0xFF1a1c28),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withAlpha(isFocused ? 100 : 0),
+                blurRadius: 20,
+                spreadRadius: 10,
+                offset: const Offset(10, 0),
+              ),
+            ],
           ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -46,25 +63,25 @@ class _SideMenuState extends State<SideMenu> {
                 isSelected: false,
                 showLabel: isFocused,
                 focusNode: sideMenuNodes[0],
-                onPressed: () {},
+                onPressed: () => itemSelected(0),
               ),
               _SideMenuButton.home(
                 isSelected: false,
                 showLabel: isFocused,
                 focusNode: sideMenuNodes[1],
-                onPressed: () {},
+                onPressed: () => itemSelected(1),
               ),
               _SideMenuButton.watchlist(
                 isSelected: false,
                 showLabel: isFocused,
                 focusNode: sideMenuNodes[2],
-                onPressed: () {},
+                onPressed: () => itemSelected(2),
               ),
               _SideMenuButton.settings(
                 isSelected: false,
                 showLabel: isFocused,
                 focusNode: sideMenuNodes[3],
-                onPressed: () {},
+                onPressed: () => itemSelected(3),
               ),
             ],
           ),

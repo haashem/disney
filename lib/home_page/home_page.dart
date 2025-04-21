@@ -1,8 +1,6 @@
-import 'package:disney/home_page/browse_traversal_policy.dart';
 import 'package:disney/home_page/carousel/carousel.dart';
 import 'package:disney/home_page/section_list.dart';
 import 'package:disney/movies/movie.dart';
-import 'package:disney/side_menu/side_menu.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
@@ -10,62 +8,29 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-      child: Stack(
-        children: [
-          Row(
-            children: [
-              SizedBox(
-                width: 74,
-              ),
-              FocusTraversalGroup(
-               // policy: BrowseTraversalPolicy(),
-                child: Expanded(
-                  child: CustomScrollView(
-                    physics: const BouncingScrollPhysics(),
-                    clipBehavior: Clip.none,
-                    slivers: [
-                      SliverPadding(padding: EdgeInsets.all(16)),
-                      SliverToBoxAdapter(
-                        child: Carousel(
-                          movies: categories.first.movies,
-                        ),
-                      ),
-                      SliverList.separated(
-                          itemCount: 2,
-                          separatorBuilder: (context, index) => const SizedBox(
-                                height: 24,
-                              ),
-                          itemBuilder: (context, index) {
-                            return SectionList(
-                              title: categories.first.title,
-                              movies: categories.first.movies,
-                            );
-                          }),
-                      SliverPadding(padding: EdgeInsets.all(16))
-                    ],
-                  ),
-                ),
-              ),
-            ],
+    return CustomScrollView(
+      physics: const BouncingScrollPhysics(),
+      clipBehavior: Clip.none,
+      slivers: [
+        SliverPadding(padding: EdgeInsets.all(16)),
+        SliverToBoxAdapter(
+          child: Carousel(
+            movies: categories.first.movies,
           ),
-          SideMenu()
-          // FocusScope(
-          //     debugLabel: 'SideMenuScope',
-          //     onKeyEvent: (node, event) {
-          //       if (event.logicalKey == LogicalKeyboardKey.arrowLeft ||
-          //           event.logicalKey == LogicalKeyboardKey.arrowRight) {
-          //         final x = node.focusInDirection(TraversalDirection.right);
-          //         node.
-          //         print(x);
-          //         return KeyEventResult.handled;
-          //       }
-
-          //       return KeyEventResult.ignored;
-          //     },
-          //     child: SideMenu()),
-        ],
-      ),
+        ),
+        SliverList.separated(
+            itemCount: 2,
+            separatorBuilder: (context, index) => const SizedBox(
+                  height: 24,
+                ),
+            itemBuilder: (context, index) {
+              return SectionList(
+                title: categories.first.title,
+                movies: categories.first.movies,
+              );
+            }),
+        SliverPadding(padding: EdgeInsets.all(16))
+      ],
     );
   }
 }
