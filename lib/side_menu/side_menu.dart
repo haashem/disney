@@ -1,4 +1,4 @@
-import 'package:disney/side_menu/side_menu_focus_traversal_policy2.dart';
+import 'package:disney/side_menu/side_menu_traversal_policy.dart';
 import 'package:flutter/material.dart';
 
 class SideMenu extends StatefulWidget {
@@ -38,7 +38,7 @@ class _SideMenuState extends State<SideMenu> {
         }
       },
       child: FocusTraversalGroup(
-        policy: SideMenuFocusTraversalPolicy2(sideMenuNodes: sideMenuNodes),
+        policy: SideMenuTraversalPolicy(sideMenuNodes: sideMenuNodes),
         child: AnimatedContainer(
           curve: Curves.easeOut,
           duration: const Duration(milliseconds: 300),

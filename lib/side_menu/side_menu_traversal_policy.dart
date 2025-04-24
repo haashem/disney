@@ -3,13 +3,14 @@ import 'package:flutter/widgets.dart';
 /// A custom focus traversal policy for a TV app side menu.
 /// Restricts vertical focus traversal to side menu items only,
 /// while allowing unrestricted horizontal navigation.
-class SideMenuFocusTraversalPolicy2 extends FocusTraversalPolicy with DirectionalFocusTraversalPolicyMixin {
+class SideMenuTraversalPolicy extends FocusTraversalPolicy
+    with DirectionalFocusTraversalPolicyMixin {
   final List<FocusNode> sideMenuNodes;
 
   /// Creates a policy that restricts vertical focus traversal to the side menu.
   ///
   /// [sideMenuNodes] should contain the list of focus nodes that belong to the side menu.
-  SideMenuFocusTraversalPolicy2({required this.sideMenuNodes});
+  SideMenuTraversalPolicy({required this.sideMenuNodes});
 
   @override
   Iterable<FocusNode> sortDescendants(
