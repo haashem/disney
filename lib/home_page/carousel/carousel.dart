@@ -36,7 +36,7 @@ class _CarouselState extends State<Carousel>
           Expanded(
             child: PageView.builder(
                 clipBehavior: Clip.none,
-                itemCount: movies.length,
+                itemCount: _tabController.length,
                 controller: _pageController,
                 onPageChanged: handlePageChange,
                 itemBuilder: (BuildContext context, int index) {

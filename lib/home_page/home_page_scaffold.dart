@@ -1,10 +1,11 @@
+import 'package:disney/home_page/browse_traversal_policy.dart';
 import 'package:disney/home_page/home_page.dart';
-import 'package:disney/home_page/scrollable_enusure_alignment.dart';
 
 import 'package:disney/search_page.dart';
 import 'package:disney/side_menu/side_menu.dart';
 import 'package:disney/watch_list_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class HomePageScaffold extends StatefulWidget {
   const HomePageScaffold({super.key});
@@ -15,7 +16,10 @@ class HomePageScaffold extends StatefulWidget {
 
 class _HomePageScaffoldState extends State<HomePageScaffold> {
   int _selectedIndex = 1;
-
+  final FocusScopeNode _sideMenuScopeNode =
+      FocusScopeNode(debugLabel: 'SideMenuScope');
+  final FocusScopeNode _homePageScopeNode =
+      FocusScopeNode(debugLabel: 'HomePageScope');
   @override
   Widget build(BuildContext context) {
     return Material(
@@ -27,59 +31,57 @@ class _HomePageScaffoldState extends State<HomePageScaffold> {
               SizedBox(
                 width: 74,
               ),
-              FocusTraversalGroup(
-                policy: ReadingOrderTraversalPolicy(
-                  requestFocusCallback: (node,
-                      {alignment, alignmentPolicy, duration, curve}) {
-                    final nodeContext = node.context;
-                    if (nodeContext == null) {
-                      return;
-                    }
-                    node.requestFocus();
-                    ScrollableX.ensureDirectionalAlignment(
-                      nodeContext,
-                      (axisDirection) => switch (axisDirection) {
-                        AxisDirection.down || AxisDirection.up => 0.6,
-                        AxisDirection.left || AxisDirection.right => 0.06
+              Expanded(
+                child: IndexedStack(index: _selectedIndex, children: [
+                  SearchPage(),
+                  FocusTraversalGroup(
+                    policy: BrowseTraversalPolicy(),
+                    child: FocusScope(
+                      node: _homePageScopeNode,
+                      autofocus: true,
+                      skipTraversal: true,
+                      onKeyEvent: (node, event) {
+                        if (event is KeyUpEvent) {
+                          return KeyEventResult.handled;
+                        }
+                        if (event.logicalKey != LogicalKeyboardKey.arrowLeft) {
+                          return KeyEventResult.ignored;
+                        }
+
+                        if (!_homePageScopeNode
+                            .focusInDirection(TraversalDirection.left)) {
+                          _sideMenuScopeNode.requestFocus();
+                        }
+                        return KeyEventResult.handled;
                       },
-                      duration: duration ?? const Duration(milliseconds: 300),
-                      curve: Curves.easeInOutQuad,
-                    );
-                  },
-                ),
-                child: Expanded(
-                  child: IndexedStack(
-                    index: _selectedIndex,
-                    children: [
-                    SearchPage(),
-                    HomePage(),
-                    WatchListPage(),
-                  ]),
-                ),
+                      child: HomePage(),
+                    ),
+                  ),
+                  WatchListPage(),
+                ]),
               ),
             ],
           ),
-          SideMenu(
-            onItemSelected: (int index) {
-              setState(() {
-                _selectedIndex = index;
-              });
+          FocusScope(
+            node: _sideMenuScopeNode,
+            skipTraversal: true,
+            onKeyEvent: (node, event) {
+              if (event is KeyUpEvent &&
+                  event.logicalKey == LogicalKeyboardKey.arrowRight &&
+                  !_homePageScopeNode.hasFocus) {
+                _homePageScopeNode.requestFocus();
+                return KeyEventResult.handled;
+              }
+              return KeyEventResult.ignored;
             },
+            child: SideMenu(
+              onItemSelected: (int index) {
+                setState(() {
+                  _selectedIndex = index;
+                });
+              },
+            ),
           )
-          // FocusScope(
-          //     debugLabel: 'SideMenuScope',
-          //     onKeyEvent: (node, event) {
-          //       if (event.logicalKey == LogicalKeyboardKey.arrowLeft ||
-          //           event.logicalKey == LogicalKeyboardKey.arrowRight) {
-          //         final x = node.focusInDirection(TraversalDirection.right);
-          //         node.
-          //         print(x);
-          //         return KeyEventResult.handled;
-          //       }
-
-          //       return KeyEventResult.ignored;
-          //     },
-          //     child: SideMenu()),
         ],
       ),
     );

@@ -4,7 +4,7 @@ import 'package:flutter/widgets.dart';
 
 class BrowseTraversalPolicy extends ReadingOrderTraversalPolicy {
   final Map<FocusScopeNode, _DirectionalPolicyData> _policyData = {};
-
+  BrowseTraversalPolicy({super.requestFocusCallback});
   @override
   void invalidateScopeData(FocusScopeNode node) {
     super.invalidateScopeData(node);
@@ -21,6 +21,12 @@ class BrowseTraversalPolicy extends ReadingOrderTraversalPolicy {
         return entry.node == node;
       });
     }
+  }
+
+  @override
+  Iterable<FocusNode> sortDescendants(Iterable<FocusNode> descendants, FocusNode currentNode) {
+    // TODO: implement sortDescendants
+    return super.sortDescendants(descendants, currentNode);
   }
 
   @override
@@ -302,6 +308,7 @@ class BrowseTraversalPolicy extends ReadingOrderTraversalPolicy {
     requestFocusCallback(
       lastNode,
       alignmentPolicy: alignmentPolicy,
+      alignment: 0.5,
       curve: Curves.easeOut,
       duration: const Duration(milliseconds: 300),
     );
@@ -357,14 +364,18 @@ class BrowseTraversalPolicy extends ReadingOrderTraversalPolicy {
       case TraversalDirection.down:
       case TraversalDirection.up:
         Iterable<FocusNode> eligibleNodes = _sortAndFilterVertically(
-            direction, focusedChild.rect, nearestScope.traversalDescendants);
+          direction,
+          focusedChild.rect,
+          nearestScope.traversalDescendants,
+        );
         if (eligibleNodes.isEmpty) {
           break;
         }
         if (focusedScrollable != null && !focusedScrollable.position.atEdge) {
           final Iterable<FocusNode> filteredEligibleNodes = eligibleNodes.where(
-              (FocusNode node) =>
-                  Scrollable.maybeOf(node.context!) == focusedScrollable);
+            (FocusNode node) =>
+                Scrollable.maybeOf(node.context!) == focusedScrollable,
+          );
           if (filteredEligibleNodes.isNotEmpty) {
             eligibleNodes = filteredEligibleNodes;
           }
@@ -372,21 +383,44 @@ class BrowseTraversalPolicy extends ReadingOrderTraversalPolicy {
         if (direction == TraversalDirection.up) {
           eligibleNodes = eligibleNodes.toList().reversed;
         }
-
-        found = _sortClosestEdgesByDistancePreferVertical(
-                focusedChild.rect.center, eligibleNodes)
-            .firstOrNull;
+        // Find any nodes that intersect the band of the focused child.
+        final Rect band = Rect.fromLTRB(
+          focusedChild.rect.left,
+          -double.infinity,
+          focusedChild.rect.right,
+          double.infinity,
+        );
+        final Iterable<FocusNode> inBand = eligibleNodes.where(
+          (FocusNode node) => !node.rect.intersect(band).isEmpty,
+        );
+        if (inBand.isNotEmpty) {
+          found =
+              _sortByDistancePreferVertical(focusedChild.rect.center, inBand)
+                  .first;
+          break;
+        }
+        // Only out-of-band targets are eligible, so pick the one that is
+        // closest to the center line horizontally, and if any are the same
+        // distance horizontally, pick the closest one of those vertically.
+        found = _sortClosestEdgesByDistancePreferHorizontal(
+          focusedChild.rect.center,
+          eligibleNodes,
+        ).first;
       case TraversalDirection.right:
       case TraversalDirection.left:
         Iterable<FocusNode> eligibleNodes = _sortAndFilterHorizontally(
-            direction, focusedChild.rect, nearestScope.traversalDescendants);
+          direction,
+          focusedChild.rect,
+          nearestScope.traversalDescendants,
+        );
         if (eligibleNodes.isEmpty) {
           break;
         }
         if (focusedScrollable != null && !focusedScrollable.position.atEdge) {
           final Iterable<FocusNode> filteredEligibleNodes = eligibleNodes.where(
-              (FocusNode node) =>
-                  Scrollable.maybeOf(node.context!) == focusedScrollable);
+            (FocusNode node) =>
+                Scrollable.maybeOf(node.context!) == focusedScrollable,
+          );
           if (filteredEligibleNodes.isNotEmpty) {
             eligibleNodes = filteredEligibleNodes;
           }
@@ -401,27 +435,29 @@ class BrowseTraversalPolicy extends ReadingOrderTraversalPolicy {
           double.infinity,
           focusedChild.rect.bottom,
         );
+
         final Iterable<FocusNode> inBand = eligibleNodes.where(
-          (FocusNode node) {
-            print(node.rect.intersect(band).isEmpty);
-            return !node.rect.intersect(band).isEmpty;
-          },
+          (FocusNode node) => !node.rect.intersect(band).isEmpty,
         );
-        found =
-            _sortByDistancePreferHorizontal(focusedChild.rect.center, inBand)
-                .firstOrNull;
-        if (found != null) {
+        if (inBand.isNotEmpty) {
+          found =
+              _sortByDistancePreferHorizontal(focusedChild.rect.center, inBand)
+                  .first;
           break;
         }
-        // If we do not find any candidates in the horizontal band,
-        // then we should not navigate anywhere
         return false;
+        // Only out-of-band targets are eligible, so pick the one that is
+        // closest to the center line vertically, and if any are the same
+        // distance vertically, pick the closest one of those horizontally.
+        found = _sortClosestEdgesByDistancePreferVertical(
+          focusedChild.rect.center,
+          eligibleNodes,
+        ).first;
     }
     if (found != null) {
       pushPolicyData(direction, nearestScope, focusedChild);
       return foundNodeToFocus(found, direction);
     }
-
     return super.inDirection(currentNode, direction);
   }
 
@@ -444,6 +480,7 @@ class BrowseTraversalPolicy extends ReadingOrderTraversalPolicy {
     requestFocusCallback(
       chosenNode,
       alignmentPolicy: alignmentPolicy,
+      alignment: 0.5,
       curve: Curves.easeOut,
       duration: const Duration(milliseconds: 300),
     );

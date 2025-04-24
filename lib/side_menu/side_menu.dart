@@ -27,7 +27,7 @@ class _SideMenuState extends State<SideMenu> {
   @override
   Widget build(BuildContext context) {
     return Focus(
-      skipTraversal: false,
+      skipTraversal: true,
       focusNode: focusNode,
       onFocusChange: (isFocused) {
         setState(() {

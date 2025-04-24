@@ -1,10 +1,14 @@
+import 'package:disney/home_page/browse_traversal_policy.dart';
 import 'package:disney/home_page/carousel/carousel.dart';
+import 'package:disney/home_page/home_page_focus_traversal_policy.dart';
 import 'package:disney/home_page/section_list.dart';
 import 'package:disney/movies/movie.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+  const HomePage({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
