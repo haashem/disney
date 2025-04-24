@@ -23,3 +23,10 @@ flutter:
   assets:
     - assets/
     - assets/images/primal-survivor/
+    - assets/images/goofy-movie/
+    - assets/images/incredibles-2/
+    - assets/images/lion-king/
+    - assets/images/peter-pan/
+    - assets/images/tarzan/
+
+

@@ -35,7 +35,11 @@ class AppRouter {
             path: showPage,
             builder: (BuildContext context, GoRouterState state) {
               return ShowPage(
-                movie: categories.first.movies.first,
+                movie:
+                    categories.expand((element) => element.movies).firstWhere(
+                          (movie) => movie.title
+                              .contains(state.uri.queryParameters['movie']!),
+                        ),
               );
             },
             routes: [

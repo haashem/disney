@@ -23,14 +23,14 @@ class HomePage extends StatelessWidget {
           ),
         ),
         SliverList.separated(
-            itemCount: 2,
+            itemCount: categories.length,
             separatorBuilder: (context, index) => const SizedBox(
                   height: 24,
                 ),
             itemBuilder: (context, index) {
               return SectionList(
-                title: categories.first.title,
-                movies: categories.first.movies,
+                title: categories[index].title,
+                movies: categories[index].movies,
               );
             }),
         SliverPadding(padding: EdgeInsets.all(16))

@@ -38,9 +38,10 @@ class SectionList extends StatelessWidget {
             scrollDirection: Axis.horizontal,
             clipBehavior: Clip.none,
             itemBuilder: (context, index) => MovieTile(
-              movie: movies[0],
+              movie: movies[index],
               focusNode: movieFocusNodes[index],
-              onPressed: () => context.go('/showpage'),
+              onPressed: () =>
+                  context.go('/showpage?movie=${movies[index].title}'),
             ),
             separatorBuilder: (context, index) => SizedBox(
               width: 16,
