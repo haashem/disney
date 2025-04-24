@@ -73,6 +73,49 @@ final List<CategorizedMovie> categories = [
         titleImageUrl:
             'https://disney.images.edge.bamgrid.com/ripcut-delivery/v2/variant/disney/246426d2-47bf-4443-8b76-44f359186348/trim?format=webp&max=800%7C300')
   ]),
+  CategorizedMovie(title: 'Actions', movies: [
+    Movie(
+      title: 'Haunted Mansion',
+      yearAndCategory: '2023 • 2h 2m • Action and Adventure, Comedy',
+      description:
+          'A mother and son enlist a motley crew of so-called spiritual experts to help rid their home of supernatural squatters.',
+      coverImageUrl: 'assets/images/haunted-mansion/cover.webp',
+      tileImageUrl: 'assets/images/haunted-mansion/tile.webp',
+      titleImageUrl: 'assets/images/haunted-mansion/title.webp',
+    ),
+    Movie(
+        title: 'Pirates of the Caribbean',
+        yearAndCategory: '2003 • 2h 23m • Action and Adventure, Fantasy',
+        description:
+            'A blacksmith teams up with a pirate to rescue his kidnapped love from a ship of ghostly pirates.',
+        coverImageUrl: 'assets/images/pirates-of-the-caribbean/cover.webp',
+        tileImageUrl: 'assets/images/pirates-of-the-caribbean/tile.webp',
+        titleImageUrl: 'assets/images/pirates-of-the-caribbean/title.webp'),
+    Movie(
+        title: 'Avatar',
+        yearAndCategory: '2009 • 2h 42m • Action and Adventure, Sci-Fi',
+        description:
+            'A paraplegic Marine dispatched to the moon Pandora on a unique mission becomes torn between following his orders and protecting a world he feels is his home.',
+        coverImageUrl: 'assets/images/avatar/cover.webp',
+        tileImageUrl: 'assets/images/avatar/tile.webp',
+        titleImageUrl: 'assets/images/avatar/title.webp'),
+    Movie(
+        title: 'Davy Crockett: King of the Wild Frontier',
+        yearAndCategory: '1955 • 1h 33m • Action and Adventure, Western',
+        description:
+            'Davy Crockett, a backwoodsman, fights to save the Alamo from Santa Anna.',
+        coverImageUrl: 'assets/images/davy-crocket/cover.webp',
+        tileImageUrl: 'assets/images/davy-crocket/tile.webp',
+        titleImageUrl: 'assets/images/davy-crocket/title.webp'),
+    Movie(
+        title: 'Knight and Day',
+        yearAndCategory: '2010 • 1h 39m • Action and Adventure, Comedy',
+        description:
+            'Tom Cruise and Cameron Diaz dazzle as action and comedy collide in this Extended Edition.',
+        coverImageUrl: 'assets/images/knight-and-day/cover.webp',
+        tileImageUrl: 'assets/images/knight-and-day/tile.webp',
+        titleImageUrl: 'assets/images/knight-and-day/title.webp'),
+  ]),
   CategorizedMovie(title: 'Animated Movies', movies: [
     Movie(
         title: 'Incredibles 2',
@@ -112,11 +155,8 @@ final List<CategorizedMovie> categories = [
         description:
             """A cub who can't wait to be king finds his place in the "Circle of Life."""
             "",
-        coverImageUrl:
-            'assets/images/lion-king/cover.webp',
-        tileImageUrl:
-            'assets/images/lion-king/tile.webp',
-        titleImageUrl:
-            'assets/images/lion-king/title.webp')
+        coverImageUrl: 'assets/images/lion-king/cover.webp',
+        tileImageUrl: 'assets/images/lion-king/tile.webp',
+        titleImageUrl: 'assets/images/lion-king/title.webp')
   ])
 ];
