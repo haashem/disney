@@ -116,6 +116,48 @@ final List<CategorizedMovie> categories = [
         tileImageUrl: 'assets/images/knight-and-day/tile.webp',
         titleImageUrl: 'assets/images/knight-and-day/title.webp'),
   ]),
+  CategorizedMovie(title: 'Documentaries', movies: [
+    Movie(
+        title: 'Aliens of the Deep',
+        yearAndCategory: '2005 • 1h 22m • Documentary, Nature',
+        description:
+            'James Cameron and a team of scientists explore the ocean’s depths to discover new life forms.',
+        coverImageUrl: 'assets/images/aliens-of-the-deep/cover.webp',
+        tileImageUrl: 'assets/images/aliens-of-the-deep/tile.webp',
+        titleImageUrl: 'assets/images/aliens-of-the-deep/title.webp'),
+    Movie(
+        title: 'Atlantis Rising',
+        yearAndCategory: '2017 • 1h 35m • Documentaries, History',
+        description:
+            "Filmmakers go in search of Atlantis using Plato's writings as a guide to lead the way.",
+        coverImageUrl: 'assets/images/atlantis-rising/cover.webp',
+        tileImageUrl: 'assets/images/atlantis-rising/tile.webp',
+        titleImageUrl: 'assets/images/atlantis-rising/title.webp'),
+    Movie(
+        title: 'Hostile Planet',
+        yearAndCategory: '2019 • 1 Season • Documentary, Nature',
+        description:
+            'This series takes a look at the most extreme environments on Earth and the animals that live there.',
+        coverImageUrl: 'assets/images/hostile-planet/cover.webp',
+        tileImageUrl: 'assets/images/hostile-planet/tile.webp',
+        titleImageUrl: 'assets/images/hostile-planet/title.webp'),
+    Movie(
+        title: 'Drain the Ocean',
+        yearAndCategory: '2018 • 1h 24m • Documentary, Nature',
+        description:
+            'Using CGI, scientists drain the ocean to reveal shipwrecks and lost cities.',
+        coverImageUrl: 'assets/images/drain-the-oceans/cover.webp',
+        tileImageUrl: 'assets/images/drain-the-oceans/tile.webp',
+        titleImageUrl: 'assets/images/drain-the-oceans/title.webp'),
+    Movie(
+        title: 'Wild Yellowstone',
+        yearAndCategory: '2015 • Documentary, Nature',
+        description:
+            'The world’s first national park is home to a variety of wildlife, including wolves, bears, and bison.',
+        coverImageUrl: 'assets/images/wild-yellowstone/cover.webp',
+        tileImageUrl: 'assets/images/wild-yellowstone/tile.webp',
+        titleImageUrl: 'assets/images/wild-yellowstone/title.webp'),
+  ]),
   CategorizedMovie(title: 'Animated Movies', movies: [
     Movie(
         title: 'Incredibles 2',

@@ -59,7 +59,7 @@ class ShowPage extends StatelessWidget {
                       children: [
                         FilledButton(
                           autofocus: true,
-                          onPressed: () => context.go('/showpage/playback'),
+                          onPressed: () => context.go('/showpage/playback?movie=${movie.title}'),
                           child: const Text('Play'),
                         ),
                         const SizedBox(width: 16),
