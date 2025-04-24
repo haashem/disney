@@ -1,4 +1,3 @@
-import 'package:disney/home_page/horizintal_list_focust_traversal_policy.dart';
 import 'package:disney/home_page/movie_tile.dart';
 import 'package:disney/movies/movie.dart';
 import 'package:flutter/material.dart';
@@ -34,6 +33,7 @@ class SectionList extends StatelessWidget {
         SizedBox(
           height: 132,
           child: ListView.separated(
+            padding: const EdgeInsets.only(right: 32),
             itemCount: movies.length,
             scrollDirection: Axis.horizontal,
             clipBehavior: Clip.none,
