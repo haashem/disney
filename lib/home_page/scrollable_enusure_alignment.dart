@@ -2,23 +2,27 @@ import 'package:flutter/widgets.dart';
 
 extension ScrollableX on Scrollable {
   // Modified version of Scrollable.ensureVisible
-  static Future<void> ensureDirectionalAlignment(
+  static Future<void> ensureCenterVerticalAlignment(
     BuildContext context,
-    double Function(AxisDirection) alignment, {
+    ScrollPositionAlignmentPolicy? alignmentPolicy, {
     Duration duration = Duration.zero,
     Curve curve = Curves.ease,
   }) {
     final List<Future<void>> futures = <Future<void>>[];
     RenderObject? targetRenderObject;
     ScrollableState? scrollable = Scrollable.maybeOf(context);
+
     while (scrollable != null) {
       final List<Future<void>> newFutures;
       newFutures = scrollable._performEnsureAlignment(
         context.findRenderObject()!,
-        alignment: alignment(scrollable.axisDirection),
+        alignment: 0.5,
         duration: duration,
         curve: curve,
-        alignmentPolicy: ScrollPositionAlignmentPolicy.explicit,
+        alignmentPolicy: scrollable.axisDirection == AxisDirection.up ||
+                scrollable.axisDirection == AxisDirection.down
+            ? ScrollPositionAlignmentPolicy.explicit
+            : alignmentPolicy ?? ScrollPositionAlignmentPolicy.explicit,
         targetRenderObject: targetRenderObject,
       );
       futures.addAll(newFutures);

@@ -1,3 +1,4 @@
+import 'package:disney/home_page/scrollable_enusure_alignment.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -21,12 +22,6 @@ class BrowseTraversalPolicy extends ReadingOrderTraversalPolicy {
         return entry.node == node;
       });
     }
-  }
-
-  @override
-  Iterable<FocusNode> sortDescendants(Iterable<FocusNode> descendants, FocusNode currentNode) {
-    // TODO: implement sortDescendants
-    return super.sortDescendants(descendants, currentNode);
   }
 
   @override
@@ -486,6 +481,22 @@ class BrowseTraversalPolicy extends ReadingOrderTraversalPolicy {
     );
     return true;
   }
+
+  @override
+  TraversalRequestFocusCallback get requestFocusCallback => (FocusNode node,
+          {ScrollPositionAlignmentPolicy? alignmentPolicy,
+          double? alignment,
+          Duration? duration,
+          Curve? curve}) {
+
+        node.requestFocus();
+        ScrollableX.ensureCenterVerticalAlignment(
+          node.context!,
+          alignmentPolicy,
+          duration: Duration(milliseconds: 200),
+          curve: curve ?? Curves.easeOut,
+        );
+      };
 }
 
 // A policy data object for use by the DirectionalFocusTraversalPolicyMixin so
