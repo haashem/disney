@@ -63,25 +63,25 @@ class _SideMenuState extends State<SideMenu> {
             spacing: 32,
             children: [
               _SideMenuButton.search(
-                isSelected: false,
+                isSelected: selectedIndex == 0,
                 showLabel: isFocused,
                 focusNode: sideMenuNodes[0],
                 onPressed: () => itemSelected(0),
               ),
               _SideMenuButton.home(
-                isSelected: false,
+                isSelected: selectedIndex == 1,
                 showLabel: isFocused,
                 focusNode: sideMenuNodes[1],
                 onPressed: () => itemSelected(1),
               ),
               _SideMenuButton.watchlist(
-                isSelected: false,
+                isSelected: selectedIndex == 2,
                 showLabel: isFocused,
                 focusNode: sideMenuNodes[2],
                 onPressed: () => itemSelected(2),
               ),
               _SideMenuButton.settings(
-                isSelected: false,
+                isSelected: selectedIndex == 3,
                 showLabel: isFocused,
                 focusNode: sideMenuNodes[3],
                 onPressed: () => itemSelected(3),
