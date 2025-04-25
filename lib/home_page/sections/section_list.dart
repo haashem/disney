@@ -3,6 +3,7 @@ import 'package:disney/movies/movie.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
+
 class SectionList extends StatelessWidget {
   final String title;
   final List<Movie> movies;

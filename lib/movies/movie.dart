@@ -64,6 +64,7 @@ final featuredMovies = CategorizedMovie(title: 'Featured', movies: [
       tileImageUrl: 'assets/images/a-complete-unknown/tile.webp',
       titleImageUrl: 'assets/images/a-complete-unknown/title.webp'),
 ]);
+
 final List<CategorizedMovie> categories = [
   CategorizedMovie(title: 'Because You Watched', movies: [
     Movie(
@@ -110,6 +111,47 @@ final List<CategorizedMovie> categories = [
             'https://disney.images.edge.bamgrid.com/ripcut-delivery/v2/variant/disney/ed52aad1-658e-4f2c-bf33-c742840a1dde/compose?format=webp&label=standard_art_178&width=800',
         titleImageUrl:
             'https://disney.images.edge.bamgrid.com/ripcut-delivery/v2/variant/disney/246426d2-47bf-4443-8b76-44f359186348/trim?format=webp&max=800%7C300')
+  ]),
+  CategorizedMovie(title: 'Recommended For You', movies: [
+    Movie(
+        title: 'Ice Age: The Meltdown',
+        yearAndCategory: '',
+        description: '',
+        coverImageUrl: '',
+        tileImageUrl: 'assets/images/ice-age-buck-wild/tile.jpg',
+        titleImageUrl: ''),
+    Movie(
+      title: 'Ice Age',
+      yearAndCategory: '',
+      description: '',
+      coverImageUrl: '',
+      tileImageUrl: 'assets/images/ice-age/tile.jpg',
+      titleImageUrl: '',
+    ),
+    Movie(
+      title: 'Hercules',
+      yearAndCategory: '',
+      description: '',
+      coverImageUrl: '',
+      tileImageUrl: 'assets/images/hercules/tile.jpg',
+      titleImageUrl: '',
+    ),
+    Movie(
+      title: 'Robin Hood',
+      yearAndCategory: '',
+      description: '',
+      coverImageUrl: '',
+      tileImageUrl: 'assets/images/robin-hood/tile.jpg',
+      titleImageUrl: '',
+    ),
+    Movie(
+      title: '101 Dalmatians',
+      yearAndCategory: '',
+      description: '',
+      coverImageUrl: '',
+      tileImageUrl: 'assets/images/101/tile.jpg',
+      titleImageUrl: '',
+    ),
   ]),
   CategorizedMovie(title: 'Actions', movies: [
     Movie(
