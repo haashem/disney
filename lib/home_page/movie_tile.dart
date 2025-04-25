@@ -58,9 +58,12 @@ class _MovieTileState extends State<MovieTile> {
             return null;
           }),
         ),
-        child: Image.asset(
-          widget.movie.tileImageUrl,
-          fit: BoxFit.cover,
+        child: Container(
+          constraints: BoxConstraints.expand(),
+          child: Image.asset(
+            widget.movie.tileImageUrl,
+            fit: BoxFit.cover,
+          ),
         ),
       ),
     );

@@ -66,93 +66,6 @@ final featuredMovies = CategorizedMovie(title: 'Featured', movies: [
 ]);
 
 final List<CategorizedMovie> categories = [
-  CategorizedMovie(title: 'Because You Watched', movies: [
-    Movie(
-        title: 'Primal Survivor',
-        yearAndCategory: '2014 – 2020 • 5 Seasons • Reality, Docuserie',
-        description:
-            'Hazen Audel relives his most thrilling moments and reveals what it takes to become Primal Survivor.',
-        coverImageUrl: 'assets/images/primal-survivor/cover.webp',
-        tileImageUrl: 'assets/images/primal-survivor/tile.webp',
-        titleImageUrl: 'assets/images/primal-survivor/title.webp'),
-    Movie(
-        title: 'A Goofy Movie',
-        yearAndCategory: '1995 • 1h 23m • Action and Adventure, Comedy',
-        description:
-            'Goofy and Max hit the road and get up to their floppy ears in misadventure.',
-        coverImageUrl: 'assets/images/goofy-movie/cover.webp',
-        tileImageUrl: 'assets/images/goofy-movie/tile.webp',
-        titleImageUrl: 'assets/images/goofy-movie/title.webp'),
-    Movie(
-        title: 'Primal Survivor',
-        yearAndCategory: '2014 – 2020 • 5 Seasons • Reality, Docuserie',
-        description:
-            'Hazen Audel relives his most thrilling moments and reveals what it takes to become Primal Survivor.',
-        coverImageUrl: 'assets/images/primal-survivor/cover.webp',
-        tileImageUrl: 'assets/images/primal-survivor/tile.webp',
-        titleImageUrl: 'assets/images/primal-survivor/title.webp'),
-    Movie(
-        title: 'Primal Survivor',
-        yearAndCategory: '2014 – 2020 • 5 Seasons • Reality, Docuserie',
-        description:
-            'Hazen Audel relives his most thrilling moments and reveals what it takes to become Primal Survivor.',
-        coverImageUrl: 'assets/images/primal-survivor/cover.webp',
-        tileImageUrl: 'assets/images/primal-survivor/tile.webp',
-        titleImageUrl: 'assets/images/primal-survivor/title.webp'),
-    Movie(
-        title: 'Running Wild with Bear Grylls',
-        yearAndCategory:
-            '2014 – 2021 • 2 Seasons • Action and Adventure, Reality',
-        description:
-            'Survivalist Bear Grylls takes celebrities on wild adventures they won’t forget.',
-        coverImageUrl:
-            'https://disney.images.edge.bamgrid.com/ripcut-delivery/v2/variant/disney/950b70e8-b278-4f79-b3ed-bed811b11b4b/compose?format=webp&width=2880',
-        tileImageUrl:
-            'https://disney.images.edge.bamgrid.com/ripcut-delivery/v2/variant/disney/ed52aad1-658e-4f2c-bf33-c742840a1dde/compose?format=webp&label=standard_art_178&width=800',
-        titleImageUrl:
-            'https://disney.images.edge.bamgrid.com/ripcut-delivery/v2/variant/disney/246426d2-47bf-4443-8b76-44f359186348/trim?format=webp&max=800%7C300')
-  ]),
-  CategorizedMovie(title: 'Recommended For You', movies: [
-    Movie(
-        title: 'Ice Age: The Meltdown',
-        yearAndCategory: '',
-        description: '',
-        coverImageUrl: '',
-        tileImageUrl: 'assets/images/ice-age-buck-wild/tile.jpg',
-        titleImageUrl: ''),
-    Movie(
-      title: 'Ice Age',
-      yearAndCategory: '',
-      description: '',
-      coverImageUrl: '',
-      tileImageUrl: 'assets/images/ice-age/tile.jpg',
-      titleImageUrl: '',
-    ),
-    Movie(
-      title: 'Hercules',
-      yearAndCategory: '',
-      description: '',
-      coverImageUrl: '',
-      tileImageUrl: 'assets/images/hercules/tile.jpg',
-      titleImageUrl: '',
-    ),
-    Movie(
-      title: 'Robin Hood',
-      yearAndCategory: '',
-      description: '',
-      coverImageUrl: '',
-      tileImageUrl: 'assets/images/robin-hood/tile.jpg',
-      titleImageUrl: '',
-    ),
-    Movie(
-      title: '101 Dalmatians',
-      yearAndCategory: '',
-      description: '',
-      coverImageUrl: '',
-      tileImageUrl: 'assets/images/101/tile.jpg',
-      titleImageUrl: '',
-    ),
-  ]),
   CategorizedMovie(title: 'Actions', movies: [
     Movie(
       title: 'Haunted Mansion',
@@ -196,6 +109,66 @@ final List<CategorizedMovie> categories = [
         tileImageUrl: 'assets/images/knight-and-day/tile.webp',
         titleImageUrl: 'assets/images/knight-and-day/title.webp'),
   ]),
+  CategorizedMovie(title: 'Recommended For You', movies: [
+    Movie(
+        title: 'Ice Age: The Meltdown',
+        yearAndCategory: '',
+        description: '',
+        coverImageUrl: '',
+        tileImageUrl: 'assets/images/ice-age-buck-wild/tile.jpg',
+        titleImageUrl: ''),
+    Movie(
+      title: 'Ice Age',
+      yearAndCategory: '',
+      description: '',
+      coverImageUrl: '',
+      tileImageUrl: 'assets/images/ice-age/tile.jpg',
+      titleImageUrl: '',
+    ),
+    Movie(
+      title: 'Hercules',
+      yearAndCategory: '',
+      description: '',
+      coverImageUrl: '',
+      tileImageUrl: 'assets/images/hercules/tile.jpg',
+      titleImageUrl: '',
+    ),
+    Movie(
+      title: 'Robin Hood',
+      yearAndCategory: '',
+      description: '',
+      coverImageUrl: '',
+      tileImageUrl: 'assets/images/robin-hood/tile.jpg',
+      titleImageUrl: '',
+    ),
+    Movie(
+      title: '101 Dalmatians',
+      yearAndCategory: '',
+      description: '',
+      coverImageUrl: '',
+      tileImageUrl: 'assets/images/101/tile.jpg',
+      titleImageUrl: '',
+    ),
+  ]),
+  CategorizedMovie(title: 'Because You Watched', movies: [
+    Movie(
+        title: 'Primal Survivor',
+        yearAndCategory: '2014 – 2020 • 5 Seasons • Reality, Docuserie',
+        description:
+            'Hazen Audel relives his most thrilling moments and reveals what it takes to become Primal Survivor.',
+        coverImageUrl: 'assets/images/primal-survivor/cover.webp',
+        tileImageUrl: 'assets/images/primal-survivor/tile.webp',
+        titleImageUrl: 'assets/images/primal-survivor/title.webp'),
+    Movie(
+        title: 'Shogun',
+        yearAndCategory: '2024 • 1 Season • Drama, Action and Adventure',
+        description:
+            'Lord Toranaga is fighting for his life when a mysterious ship is marooned in a nearby village.',
+        coverImageUrl: 'assets/images/shogun/cover.webp',
+        tileImageUrl: 'assets/images/shogun/tile.webp',
+        titleImageUrl: 'assets/images/shogun/title.webp'),
+    
+  ]),
   CategorizedMovie(title: 'Documentaries', movies: [
     Movie(
         title: 'Aliens of the Deep',
@@ -206,14 +179,6 @@ final List<CategorizedMovie> categories = [
         tileImageUrl: 'assets/images/aliens-of-the-deep/tile.webp',
         titleImageUrl: 'assets/images/aliens-of-the-deep/title.webp'),
     Movie(
-        title: 'Atlantis Rising',
-        yearAndCategory: '2017 • 1h 35m • Documentaries, History',
-        description:
-            "Filmmakers go in search of Atlantis using Plato's writings as a guide to lead the way.",
-        coverImageUrl: 'assets/images/atlantis-rising/cover.webp',
-        tileImageUrl: 'assets/images/atlantis-rising/tile.webp',
-        titleImageUrl: 'assets/images/atlantis-rising/title.webp'),
-    Movie(
         title: 'Hostile Planet',
         yearAndCategory: '2019 • 1 Season • Documentary, Nature',
         description:
@@ -221,6 +186,14 @@ final List<CategorizedMovie> categories = [
         coverImageUrl: 'assets/images/hostile-planet/cover.webp',
         tileImageUrl: 'assets/images/hostile-planet/tile.webp',
         titleImageUrl: 'assets/images/hostile-planet/title.webp'),
+    Movie(
+        title: 'Atlantis Rising',
+        yearAndCategory: '2017 • 1h 35m • Documentaries, History',
+        description:
+            "Filmmakers go in search of Atlantis using Plato's writings as a guide to lead the way.",
+        coverImageUrl: 'assets/images/atlantis-rising/cover.webp',
+        tileImageUrl: 'assets/images/atlantis-rising/tile.webp',
+        titleImageUrl: 'assets/images/atlantis-rising/title.webp'),
     Movie(
         title: 'Drain the Ocean',
         yearAndCategory: '2018 • 1h 24m • Documentary, Nature',
