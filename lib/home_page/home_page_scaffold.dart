@@ -3,6 +3,7 @@ import 'package:disney/home_page/home_page.dart';
 
 import 'package:disney/search_page.dart';
 import 'package:disney/side_menu/side_menu.dart';
+import 'package:disney/side_menu/side_menu_traversal_policy.dart';
 import 'package:disney/watch_list_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -15,11 +16,21 @@ class HomePageScaffold extends StatefulWidget {
 }
 
 class _HomePageScaffoldState extends State<HomePageScaffold> {
-  int _selectedIndex = 1;
+  int _selectedIndex = 0;
   final FocusScopeNode _sideMenuScopeNode =
       FocusScopeNode(debugLabel: 'SideMenuScope');
   final FocusScopeNode _homePageScopeNode =
       FocusScopeNode(debugLabel: 'HomePageScope');
+  final FocusScopeNode _searchPageScopeNode =
+      FocusScopeNode(debugLabel: 'SearchPageScope');
+  final FocusScopeNode _watchListPageScopeNode =
+      FocusScopeNode(debugLabel: 'WatchListPageScope');
+
+  late final rightPanelScopeNodes = [
+    _searchPageScopeNode,
+    _homePageScopeNode,
+    _watchListPageScopeNode,
+  ];
   @override
   Widget build(BuildContext context) {
     return Material(
@@ -33,7 +44,24 @@ class _HomePageScaffoldState extends State<HomePageScaffold> {
               ),
               Expanded(
                 child: IndexedStack(index: _selectedIndex, children: [
-                  SearchPage(),
+                  FocusScope(
+                      node: _searchPageScopeNode,
+                      skipTraversal: true,
+                      onKeyEvent: (node, event) {
+                        if (event is KeyUpEvent) {
+                          return KeyEventResult.handled;
+                        }
+                        if (event.logicalKey != LogicalKeyboardKey.arrowLeft) {
+                          return KeyEventResult.ignored;
+                        }
+
+                        if (!_searchPageScopeNode
+                            .focusInDirection(TraversalDirection.left)) {
+                          _sideMenuScopeNode.requestFocus();
+                        }
+                        return KeyEventResult.handled;
+                      },
+                      child: SearchPage()),
                   FocusTraversalGroup(
                     policy: BrowseTraversalPolicy(),
                     child: FocusScope(
@@ -67,17 +95,23 @@ class _HomePageScaffoldState extends State<HomePageScaffold> {
             skipTraversal: true,
             onKeyEvent: (node, event) {
               if (event is KeyUpEvent &&
-                  event.logicalKey == LogicalKeyboardKey.arrowRight &&
-                  !_homePageScopeNode.hasFocus) {
-                _homePageScopeNode.requestFocus();
+                  event.logicalKey == LogicalKeyboardKey.arrowRight) {
+                rightPanelScopeNodes[_selectedIndex].requestFocus();
+
                 return KeyEventResult.handled;
               }
               return KeyEventResult.ignored;
             },
             child: SideMenu(
+              focusNode: _sideMenuScopeNode,
+              selectedIndex: _selectedIndex,
               onItemSelected: (int index) {
                 setState(() {
                   _selectedIndex = index;
+                  final targetScopeNode = rightPanelScopeNodes[_selectedIndex];
+
+                  print(targetScopeNode.focusedChild);
+                  targetScopeNode.requestFocus();
                 });
               },
             ),
