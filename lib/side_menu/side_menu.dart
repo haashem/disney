@@ -2,9 +2,14 @@ import 'package:disney/side_menu/side_menu_traversal_policy.dart';
 import 'package:flutter/material.dart';
 
 class SideMenu extends StatefulWidget {
+  final int selectedIndex;
+  final FocusNode focusNode;
   final ValueChanged<int> onItemSelected;
+
   const SideMenu({
     super.key,
+    this.selectedIndex = 0,
+    required this.focusNode,
     required this.onItemSelected,
   });
 
@@ -14,8 +19,8 @@ class SideMenu extends StatefulWidget {
 
 class _SideMenuState extends State<SideMenu> {
   bool isFocused = false;
-  int selectedIndex = 1;
-  final FocusNode focusNode = FocusNode(debugLabel: 'SideMenu Focus Node');
+  late int selectedIndex = widget.selectedIndex;
+  late final FocusNode focusNode = widget.focusNode;
   final List<FocusNode> sideMenuNodes = List.generate(
     4,
     (index) => FocusNode(debugLabel: 'SideMenuItem $index'),
@@ -23,15 +28,15 @@ class _SideMenuState extends State<SideMenu> {
 
   void itemSelected(int index) {
     selectedIndex = index;
-    widget.onItemSelected(index);
     focusNode.unfocus();
+    widget.onItemSelected(index);
   }
 
   @override
   Widget build(BuildContext context) {
     return Focus(
       skipTraversal: true,
-      focusNode: focusNode,
+      parentNode: focusNode,
       onFocusChange: (isFocused) {
         setState(() {
           this.isFocused = isFocused;
