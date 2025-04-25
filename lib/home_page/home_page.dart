@@ -18,9 +18,7 @@ class HomePage extends StatelessWidget {
       slivers: [
         SliverPadding(padding: EdgeInsets.all(16)),
         SliverToBoxAdapter(
-          child: Carousel(
-            movies: categories.first.movies,
-          ),
+          child: Carousel(),
         ),
         SliverList.separated(
             itemCount: categories.length,

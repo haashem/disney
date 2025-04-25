@@ -26,6 +26,44 @@ class Movie {
   });
 }
 
+final featuredMovies = CategorizedMovie(title: 'Featured', movies: [
+  Movie(
+      title: 'Star Wars',
+      yearAndCategory: '',
+      description: '',
+      coverImageUrl: 'assets/images/star-wars/cover.webp',
+      tileImageUrl: 'assets/images/star-wars/tile.webp',
+      titleImageUrl: 'assets/images/star-wars/title.webp'),
+  Movie(
+    title: 'Tracker',
+    yearAndCategory: '',
+    description: '',
+    coverImageUrl: 'assets/images/tracker/cover.webp',
+    tileImageUrl: 'assets/images/tracker/tile.webp',
+    titleImageUrl: 'assets/images/tracker/title.webp',
+  ),
+  Movie(
+      title: 'Dare Devil',
+      yearAndCategory: '',
+      description: '',
+      coverImageUrl: 'assets/images/daredevil/cover.webp',
+      tileImageUrl: 'assets/images/daredevil/tile.webp',
+      titleImageUrl: 'assets/images/daredevil/title.webp'),
+  Movie(
+      title: 'Andior',
+      yearAndCategory: '',
+      description: '',
+      coverImageUrl: 'assets/images/andior/cover.webp',
+      tileImageUrl: 'assets/images/andior/tile.webp',
+      titleImageUrl: 'assets/images/andior/title.webp'),
+  Movie(
+      title: 'A Complete Unknown',
+      yearAndCategory: '',
+      description: '',
+      coverImageUrl: 'assets/images/a-complete-unknown/cover.webp',
+      tileImageUrl: 'assets/images/a-complete-unknown/tile.webp',
+      titleImageUrl: 'assets/images/a-complete-unknown/title.webp'),
+]);
 final List<CategorizedMovie> categories = [
   CategorizedMovie(title: 'Because You Watched', movies: [
     Movie(

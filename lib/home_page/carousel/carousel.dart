@@ -3,12 +3,7 @@ import 'package:disney/movies/movie.dart';
 import 'package:flutter/material.dart';
 
 class Carousel extends StatefulWidget {
-  final List<Movie> movies;
-
-  const Carousel({
-    super.key,
-    required this.movies,
-  });
+  const Carousel({super.key});
 
   @override
   State<Carousel> createState() => _CarouselState();
@@ -16,7 +11,7 @@ class Carousel extends StatefulWidget {
 
 class _CarouselState extends State<Carousel>
     with SingleTickerProviderStateMixin {
-  late final List<Movie> movies = widget.movies;
+  final List<Movie> movies = featuredMovies.movies;
   late final TabController _tabController = TabController(
     length: movies.length,
     vsync: this,
@@ -75,8 +70,19 @@ class _CarouselState extends State<Carousel>
                         children: [
                           Image.asset(
                             movies[index].coverImageUrl,
-                            fit: BoxFit.fitWidth,
-                          )
+                            fit: BoxFit.cover,
+                          ),
+                          Align(
+                            alignment: Alignment.centerLeft,
+                            child: Padding(
+                              padding: const EdgeInsets.all(16),
+                              child: Image.asset(
+                                movies[index].titleImageUrl,
+                                fit: BoxFit.fitWidth,
+                                scale: 4,
+                              ),
+                            ),
+                          ),
                         ],
                       ),
                     ),
