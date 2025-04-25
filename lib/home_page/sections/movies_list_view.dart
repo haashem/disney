@@ -8,31 +8,44 @@ enum _DisplaySize {
   large,
 }
 
-class MoviesListView extends StatelessWidget {
+class MoviesListView extends StatefulWidget {
   final CategorizedMovie category;
   final _DisplaySize _displaySize;
 
+  const MoviesListView.standard({
+    super.key,
+    required this.category,
+  }) : _displaySize = _DisplaySize.standard;
+
+  const MoviesListView.large({
+    super.key,
+    required this.category,
+  }) : _displaySize = _DisplaySize.large;
+
+  @override
+  State<MoviesListView> createState() => _MoviesListViewState();
+}
+
+class _MoviesListViewState extends State<MoviesListView> {
   late final List<FocusNode> movieFocusNodes = List.generate(
     movies.length,
     (index) => FocusNode(debugLabel: 'MovieTile $index'),
   );
 
-  MoviesListView.standard({
-    super.key,
-    required this.category,
-  }) : _displaySize = _DisplaySize.standard;
+  late final List<Movie> movies = widget.category.movies;
 
-  MoviesListView.large({
-    super.key,
-    required this.category,
-  }) : _displaySize = _DisplaySize.large;
-
-  late final List<Movie> movies = category.movies;
+  @override
+  void dispose() {
+    for (var node in movieFocusNodes) {
+      node.dispose();
+    }
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: switch (_displaySize) {
+      height: switch (widget._displaySize) {
         _DisplaySize.standard => 132,
         _DisplaySize.large => 400,
       },
