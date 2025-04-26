@@ -39,6 +39,7 @@ class _CarouselState extends State<Carousel>
                     padding: const EdgeInsets.symmetric(horizontal: 8),
                     child: ElevatedButton(
                       clipBehavior: Clip.hardEdge,
+                      autofocus: true,
                       onHover: (value) => setState(() {
                         isHovered = value;
                       }),

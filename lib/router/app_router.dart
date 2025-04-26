@@ -3,7 +3,7 @@ import 'package:disney/movies/movie.dart';
 import 'package:disney/playback/ui/playback_page.dart';
 import 'package:disney/profile_selection_page.dart';
 import 'package:disney/search_page.dart';
-import 'package:disney/show_page.dart';
+import 'package:disney/show_page/show_page.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 

@@ -18,6 +18,46 @@ class DisneyApp extends StatelessWidget {
         showValueIndicator: ShowValueIndicator.always,
         valueIndicatorColor: Colors.white,
       ),
+      textButtonTheme: TextButtonThemeData(
+        style: ButtonStyle(
+          foregroundColor: WidgetStateProperty.resolveWith((states) {
+            return Colors.white;
+          }),
+          surfaceTintColor: WidgetStateProperty.resolveWith((states) {
+            return Colors.transparent;
+          }),
+          // overlayColor: WidgetStateProperty.resolveWith((states) {
+          //   return Colors.transparent;
+          // }),
+          shape: WidgetStatePropertyAll(
+            RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(0),
+            ),
+          ),
+          backgroundBuilder: (context, states, child) {
+            return Container(
+              decoration: BoxDecoration(
+                border: Border(
+                  bottom: BorderSide(
+                    color: states.contains(WidgetState.focused)
+                        ? Colors.white
+                        : Colors.transparent,
+                    width: 2,
+                  ),
+                ),
+              ),
+              child: child,
+            );
+          },
+
+          // padding: WidgetStatePropertyAll(
+          //   const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+          // ),
+          // minimumSize: WidgetStatePropertyAll(
+          //   const Size(130, 52),
+          // ),
+        ),
+      ),
       filledButtonTheme: FilledButtonThemeData(
         style: ButtonStyle(
           backgroundColor: WidgetStateProperty.resolveWith((states) {
@@ -36,7 +76,7 @@ class DisneyApp extends StatelessWidget {
             const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
           ),
           minimumSize: WidgetStatePropertyAll(
-            const Size(100, 52),
+            const Size(130, 52),
           ),
           shape: WidgetStatePropertyAll(
             RoundedRectangleBorder(
@@ -47,7 +87,18 @@ class DisneyApp extends StatelessWidget {
       ),
       iconButtonTheme: IconButtonThemeData(
         style: ButtonStyle(
-          // foregroundColor: WidgetStatePropertyAll(Colors.white),
+          backgroundColor: WidgetStateProperty.resolveWith((states) {
+            if (states.contains(WidgetState.focused)) {
+              return Colors.white;
+            }
+            return Colors.white10;
+          }),
+          foregroundColor: WidgetStateProperty.resolveWith((states) {
+            if (states.contains(WidgetState.focused)) {
+              return Colors.black;
+            }
+            return Colors.white;
+          }),
           side: WidgetStateProperty.resolveWith((states) {
             if (states.contains(WidgetState.focused)) {
               return const BorderSide(
