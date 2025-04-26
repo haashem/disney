@@ -1,17 +1,55 @@
+import 'package:disney/home_page/carousel/carousel.dart';
 import 'package:flutter/material.dart';
 
-class SearchPage extends StatelessWidget {
+class SearchPage extends StatefulWidget {
   const SearchPage({super.key});
 
   @override
+  State<SearchPage> createState() => _SearchPageState();
+}
+
+class _SearchPageState extends State<SearchPage> {
+  final textFieldController = TextEditingController();
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Search'),
-      ),
-      body: Center(
-        child: Text('Search Page'),
-      ),
-    );
+        body: CustomScrollView(
+      physics: const BouncingScrollPhysics(),
+      clipBehavior: Clip.none,
+      slivers: [
+        SliverPadding(padding: EdgeInsets.only(top: 32)),
+        SliverToBoxAdapter(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: TextField(
+              autofocus: true,
+              controller: textFieldController,
+              decoration: InputDecoration(
+                filled: true,
+                fillColor: Colors.white10,
+                hintText: 'Search by title, character, or genre',
+                border: const OutlineInputBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(8)),
+                  borderSide: BorderSide.none,
+                ),
+              ),
+              style: Theme.of(context).textTheme.headlineSmall,
+            ),
+          ),
+        ),
+        SliverToBoxAdapter(
+          child: Padding(
+            padding: EdgeInsets.all(16),
+            child: Text(
+              'Explore',
+              style: Theme.of(context).textTheme.titleLarge,
+            ),
+          ),
+        ),
+        SliverToBoxAdapter(
+          child: Carousel(),
+        ),
+      ],
+    ));
   }
 }

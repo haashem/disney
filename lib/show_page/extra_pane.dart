@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:disney/movies/movie.dart';
+import 'package:disney/show_page/episodes_tab.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -24,6 +25,7 @@ class _ExtraPaneState extends State<ExtraPane> {
   late final FocusNode _focusNode = widget
       .focusNode; //FocusNode(debugLabel: 'Extra Pane Inner Focus Node', skipTraversal: true);
   bool _isFocused = false;
+  int selectedTabIndex = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -53,9 +55,8 @@ class _ExtraPaneState extends State<ExtraPane> {
                   SizedBox(
                     height: 16,
                   ),
-                  AnimatedOpacity(
-                    opacity: _isFocused ? 1 : 0,
-                    duration: Duration(milliseconds: 200),
+                  Visibility(
+                    visible: _isFocused,
                     child: Align(
                       alignment: Alignment.centerLeft,
                       child: Image.asset(
@@ -79,9 +80,36 @@ class _ExtraPaneState extends State<ExtraPane> {
                     child: Row(
                       spacing: 8,
                       children: [
-                        TextButton(onPressed: () {}, child: Text('EPISODES')),
-                        TextButton(onPressed: () {}, child: Text('SUGGESTED')),
-                        TextButton(onPressed: () {}, child: Text('DETAILS')),
+                        TextButton(
+                            onPressed: () => {
+                                  setState(() {
+                                    selectedTabIndex = 0;
+                                  })
+                                },
+                            onFocusChange: (value) => {
+                                  setState(() {
+                                    selectedTabIndex = 0;
+                                  })
+                                },
+                            child: Text('EPISODES')),
+                        TextButton(
+                            onPressed: () {},
+                            onFocusChange: (value) {},
+                            child: Text('SUGGESTED')),
+                        TextButton(
+                            onPressed: () {},
+                            onFocusChange: (value) {},
+                            child: Text('DETAILS')),
+                      ],
+                    ),
+                  ),
+                  Expanded(
+                    child: IndexedStack(
+                      index: selectedTabIndex,
+                      children: [
+                        EpisodesTab(),
+                        Container(),
+                        Container(),
                       ],
                     ),
                   ),

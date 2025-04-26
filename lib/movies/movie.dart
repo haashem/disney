@@ -167,7 +167,6 @@ final List<CategorizedMovie> categories = [
         coverImageUrl: 'assets/images/shogun/cover.webp',
         tileImageUrl: 'assets/images/shogun/tile.webp',
         titleImageUrl: 'assets/images/shogun/title.webp'),
-    
   ]),
   CategorizedMovie(title: 'Documentaries', movies: [
     Movie(
@@ -254,4 +253,85 @@ final List<CategorizedMovie> categories = [
         tileImageUrl: 'assets/images/lion-king/tile.webp',
         titleImageUrl: 'assets/images/lion-king/title.webp')
   ])
+];
+
+final List<List<Movie>> seasons = [
+  [
+    Movie(
+        title: '1. Chapter 1: The Mandalorian',
+        yearAndCategory: '',
+        description:
+            'A Mandalorian bounty hunter tracks a target for a well-paying, mysterious client.',
+        coverImageUrl: '',
+        tileImageUrl: 'assets/images/star-wars/season1/tile1.webp',
+        titleImageUrl: ''),
+    Movie(
+        title: '2. Chapter 2: The Child',
+        yearAndCategory: '',
+        description:
+            'Having tracked down a valuable quarry, the Mandalorian must now contend with thieving bandits.',
+        coverImageUrl: '',
+        tileImageUrl: 'assets/images/star-wars/season1/tile2.webp',
+        titleImageUrl: ''),
+    Movie(
+        title: '3. Chapter 3: The Sin',
+        yearAndCategory: '',
+        description:
+            'The battered Mandalorian returns to his client for reward, but some deals don’t end neatly.',
+        coverImageUrl: '',
+        tileImageUrl: 'assets/images/star-wars/season1/tile3.webp',
+        titleImageUrl: '')
+  ],
+  [
+    Movie(
+        title: '1. Chapter 9: The Marshal',
+        yearAndCategory: '',
+        description:
+            'The Mandalorian is drawn to the Outer Rim in search of others of his kind.',
+        coverImageUrl: '',
+        tileImageUrl: 'assets/images/star-wars/season2/tile1.webp',
+        titleImageUrl: ''),
+    Movie(
+        title: '2. Chapter 10: The Passenger',
+        yearAndCategory: '',
+        description:
+            'The Mandalorian must ferry a passenger with precious cargo on a risky journey.',
+        coverImageUrl: '',
+        tileImageUrl: 'assets/images/star-wars/season2/tile2.webp',
+        titleImageUrl: ''),
+    Movie(
+        title: '3. Chapter 11: The Heiress',
+        yearAndCategory: '',
+        description:
+            'The Mandalorian braves high seas and meets unexpected allies.',
+        coverImageUrl: '',
+        tileImageUrl: 'assets/images/star-wars/season2/tile3.webp',
+        titleImageUrl: '')
+  ],
+  [
+    Movie(
+        title: '1. Chapter 17: The Apostate',
+        yearAndCategory: '',
+        description: 'The Mandalorian begins an important journey.',
+        coverImageUrl: '',
+        tileImageUrl: 'assets/images/star-wars/season3/tile2.webp',
+        titleImageUrl: ''),
+    Movie(
+        title: '2. Chapter 18: The Mines of Mandalore',
+        yearAndCategory: '',
+        description:
+            'The Mandalorian and Grogu explore the ruins of a destroyed planet.',
+        coverImageUrl: '',
+        tileImageUrl: 'assets/images/star-wars/season3/tile1.webp',
+        titleImageUrl: ''),
+    
+    Movie(
+        title: '3. Chapter 19: The Convert',
+        yearAndCategory: '',
+        description:
+            'On Coruscant, former Imperials find amnesty in the New Republic.',
+        coverImageUrl: '',
+        tileImageUrl: 'assets/images/star-wars/season3/tile3.webp',
+        titleImageUrl: '')
+  ]
 ];

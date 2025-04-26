@@ -42,6 +42,9 @@ flutter:
     - assets/images/wild-yellowstone/
     - assets/images/atlantis-rising/
     - assets/images/star-wars/
+    - assets/images/star-wars/season1/
+    - assets/images/star-wars/season2/
+    - assets/images/star-wars/season3/
     - assets/images/tracker/
     - assets/images/a-complete-unknown/
     - assets/images/andior/

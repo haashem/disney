@@ -113,7 +113,6 @@ class _ShowPageState extends State<ShowPage> {
             height: stackSize.height,
             child: ExtraPane(
                 onFocusChange: (paneFocused) {
-                  print('Pane Focused: $paneFocused');
                   setState(() {
                     backdropIsVisible = !paneFocused;
                     if (backdropIsVisible) {
