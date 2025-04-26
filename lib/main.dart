@@ -63,6 +63,7 @@ class DisneyApp extends StatelessWidget {
 
     return MaterialApp.router(
       theme: themeData,
+      debugShowCheckedModeBanner: false,
       routerConfig: AppRouter.router,
     );
   }

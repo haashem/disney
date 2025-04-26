@@ -22,6 +22,27 @@ class _PlaybackPageState extends State<PlaybackPage> {
         setState(() {});
         _controller.play();
       });
+
+    _controller.addListener(() {
+      if (_controller.value.hasError) {
+        showDialog(
+            context: context,
+            builder: (context) {
+              return AlertDialog(
+                title: const Text('Error'),
+                content: Text(_controller.value.errorDescription ?? ''),
+                actions: [
+                  TextButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: const Text('OK'),
+                  ),
+                ],
+              );
+            });
+      }
+    });
   }
 
   @override
