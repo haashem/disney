@@ -1,9 +1,6 @@
-import 'package:disney/home_page/browse_traversal_policy.dart';
 import 'package:disney/home_page/carousel/carousel.dart';
-import 'package:disney/home_page/home_page_focus_traversal_policy.dart';
 import 'package:disney/home_page/sections/list_section.dart';
 import 'package:disney/home_page/sections/movies_list_view.dart';
-import 'package:disney/home_page/sections/section_list.dart';
 import 'package:disney/movies/movie.dart';
 import 'package:flutter/material.dart';
 
@@ -30,7 +27,9 @@ class HomePage extends StatelessWidget {
             itemBuilder: (context, index) {
               return ListSection(
                 title: categories[index].title,
-                child: index == 1 ? MoviesListView.large(category: categories[index]) : MoviesListView.standard(category: categories[index]),
+                child: index == 1
+                    ? MoviesListView.large(category: categories[index])
+                    : MoviesListView.standard(category: categories[index]),
               );
             }),
         SliverPadding(padding: EdgeInsets.all(16))

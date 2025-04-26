@@ -36,7 +36,6 @@ extension ScrollableX on Scrollable {
       return Future.value();
     }
     if (futures.length == 1) {
-      // ignore: avoid-unsafe-collection-methods
       return futures.single;
     }
     return Future.wait<void>(futures).then((List<void> _) => null);

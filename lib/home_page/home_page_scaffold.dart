@@ -3,7 +3,6 @@ import 'package:disney/home_page/home_page.dart';
 
 import 'package:disney/search_page.dart';
 import 'package:disney/side_menu/side_menu.dart';
-import 'package:disney/side_menu/side_menu_traversal_policy.dart';
 import 'package:disney/watch_list_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -16,7 +15,7 @@ class HomePageScaffold extends StatefulWidget {
 }
 
 class _HomePageScaffoldState extends State<HomePageScaffold> {
-  int _selectedIndex = 0;
+  int _selectedIndex = 1;
   final FocusScopeNode _sideMenuScopeNode =
       FocusScopeNode(debugLabel: 'SideMenuScope');
   final FocusScopeNode _homePageScopeNode =

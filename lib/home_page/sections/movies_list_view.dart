@@ -29,7 +29,7 @@ class MoviesListView extends StatefulWidget {
 class _MoviesListViewState extends State<MoviesListView> {
   late final List<FocusNode> movieFocusNodes = List.generate(
     movies.length,
-    (index) => FocusNode(debugLabel: 'MovieTile $index'),
+    (index) => FocusNode(debugLabel: movies[index].title),
   );
 
   late final List<Movie> movies = widget.category.movies;
