@@ -9,7 +9,6 @@ import 'package:go_router/go_router.dart';
 
 class AppRouter {
   static const String profileSelection = 'profile-selection';
-  static const String home = 'browse';
   static const String playback = 'playback';
   static const String showPage = 'showpage';
   static const String search = 'search';
@@ -22,15 +21,15 @@ class AppRouter {
     GoRoute(
       path: '/',
       builder: (BuildContext context, GoRouterState state) {
+        return const ProfileSelectionPage();
+      },
+    ),
+    GoRoute(
+      path: '/home',
+      builder: (BuildContext context, GoRouterState state) {
         return const HomePageScaffold();
       },
       routes: <RouteBase>[
-        GoRoute(
-          path: profileSelection,
-          builder: (BuildContext context, GoRouterState state) {
-            return const ProfileSelectionPage();
-          },
-        ),
         GoRoute(
             path: showPage,
             builder: (BuildContext context, GoRouterState state) {
