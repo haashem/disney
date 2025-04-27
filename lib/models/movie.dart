@@ -68,6 +68,15 @@ final featuredMovies = CategorizedMovie(title: 'Featured', movies: [
 final List<CategorizedMovie> categories = [
   CategorizedMovie(title: 'Actions', movies: [
     Movie(
+        title: 'Star Wars',
+        yearAndCategory:
+            '2019 – 2023 • 3 Seasons • Action and Adventure, Science Fiction',
+        description:
+            'After the Empire’s fall, a lone Mandalorian makes his way through the galaxy with his foundling.',
+        coverImageUrl: 'assets/images/star-wars/cover.webp',
+        tileImageUrl: 'assets/images/star-wars/tile.webp',
+        titleImageUrl: 'assets/images/star-wars/title.webp'),
+    Movie(
       title: 'Haunted Mansion',
       yearAndCategory: '2023 • 2h 2m • Action and Adventure, Comedy',
       description:
@@ -324,7 +333,6 @@ final List<List<Movie>> seasons = [
         coverImageUrl: '',
         tileImageUrl: 'assets/images/star-wars/season3/tile1.webp',
         titleImageUrl: ''),
-    
     Movie(
         title: '3. Chapter 19: The Convert',
         yearAndCategory: '',
