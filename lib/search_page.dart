@@ -1,4 +1,3 @@
-import 'package:disney/home_page/carousel/carousel.dart';
 import 'package:flutter/material.dart';
 
 class SearchPage extends StatefulWidget {
@@ -22,7 +21,6 @@ class _SearchPageState extends State<SearchPage> {
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: TextField(
-              autofocus: true,
               controller: textFieldController,
               decoration: InputDecoration(
                 filled: true,
@@ -46,9 +44,9 @@ class _SearchPageState extends State<SearchPage> {
             ),
           ),
         ),
-        SliverToBoxAdapter(
-          child: Carousel(),
-        ),
+        // SliverToBoxAdapter(
+        //   child: Carousel(),
+        // ),
       ],
     ));
   }
