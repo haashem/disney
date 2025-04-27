@@ -1,6 +1,7 @@
 import 'package:disney/home_page/movie_tile.dart';
 import 'package:disney/movies/movie.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class EpisodesTab extends StatefulWidget {
   const EpisodesTab({super.key});
@@ -15,11 +16,18 @@ class _EpisodesTabState extends State<EpisodesTab> {
     3,
     (index) => FocusNode(debugLabel: 'Season $index'),
   );
+  final FocusScopeNode _seasonsFocusNode =
+      FocusScopeNode(debugLabel: 'Seasons Focus Node', skipTraversal: true);
+  final FocusScopeNode _episodesFocusNode =
+      FocusScopeNode(debugLabel: 'Episodes Focus Node', skipTraversal: true);
+
   @override
   void dispose() {
     for (var node in seasonFocusNodes) {
       node.dispose();
     }
+    _seasonsFocusNode.dispose();
+    _episodesFocusNode.dispose();
     super.dispose();
   }
 
@@ -29,12 +37,30 @@ class _EpisodesTabState extends State<EpisodesTab> {
       padding: const EdgeInsets.only(top: 16),
       child: Row(
         children: [
-          Focus(
+          FocusScope(
             skipTraversal: true,
+            node: _seasonsFocusNode,
             onFocusChange: (isFocused) {
               if (isFocused) {
                 seasonFocusNodes[selectedSeasonIndex].requestFocus();
               }
+            },
+            onKeyEvent: (node, event) {
+              if (event is KeyUpEvent) {
+                return KeyEventResult.handled;
+              }
+              if (event.logicalKey == LogicalKeyboardKey.arrowUp) {
+                if (_seasonsFocusNode.focusInDirection(TraversalDirection.up)) {
+                  return KeyEventResult.handled;
+                }
+                return KeyEventResult.ignored;
+              }
+              if (event.logicalKey != LogicalKeyboardKey.arrowRight) {
+                return KeyEventResult.ignored;
+              }
+              _episodesFocusNode.requestFocus();
+              _episodesFocusNode.focusInDirection(TraversalDirection.right);
+              return KeyEventResult.handled;
             },
             child: SizedBox(
               width: 200,
@@ -49,6 +75,7 @@ class _EpisodesTabState extends State<EpisodesTab> {
                     onPressed: () {
                       setState(() {
                         selectedSeasonIndex = 0;
+                        _focusToTheFirstEpisode();
                       });
                     },
                   ),
@@ -59,6 +86,7 @@ class _EpisodesTabState extends State<EpisodesTab> {
                     onPressed: () {
                       setState(() {
                         selectedSeasonIndex = 1;
+                        _focusToTheFirstEpisode();
                       });
                     },
                   ),
@@ -69,6 +97,7 @@ class _EpisodesTabState extends State<EpisodesTab> {
                     onPressed: () {
                       setState(() {
                         selectedSeasonIndex = 2;
+                        _focusToTheFirstEpisode();
                       });
                     },
                   ),
@@ -77,17 +106,41 @@ class _EpisodesTabState extends State<EpisodesTab> {
             ),
           ),
           Expanded(
-            child: ListView.separated(
-                itemCount: seasons[selectedSeasonIndex].length,
-                separatorBuilder: (context, index) => const SizedBox(
-                      height: 16,
-                    ),
-                itemBuilder: (context, index) =>
-                    _EpisodeTile(episode: seasons[selectedSeasonIndex][index])),
+            child: FocusScope(
+              node: _episodesFocusNode,
+              onKeyEvent: (node, event) {
+                if (event is KeyUpEvent) {
+                  return KeyEventResult.handled;
+                }
+                if (event.logicalKey == LogicalKeyboardKey.arrowUp) {
+                  if (_episodesFocusNode
+                      .focusInDirection(TraversalDirection.up)) {
+                    return KeyEventResult.handled;
+                  }
+                  return KeyEventResult.ignored;
+                }
+                if (event.logicalKey != LogicalKeyboardKey.arrowLeft) {
+                  return KeyEventResult.ignored;
+                }
+                _seasonsFocusNode.requestFocus();
+                return KeyEventResult.handled;
+              },
+              child: ListView.separated(
+                  itemCount: seasons[selectedSeasonIndex].length,
+                  separatorBuilder: (context, index) => const SizedBox(
+                        height: 16,
+                      ),
+                  itemBuilder: (context, index) => _EpisodeTile(
+                      episode: seasons[selectedSeasonIndex][index])),
+            ),
           ),
         ],
       ),
     );
+  }
+
+  void _focusToTheFirstEpisode() {
+    _episodesFocusNode.requestFocus(_episodesFocusNode.children.first);
   }
 }
 
@@ -152,15 +205,29 @@ class _SeasonButton extends StatelessWidget {
   }
 }
 
-class _EpisodeTile extends StatelessWidget {
+class _EpisodeTile extends StatefulWidget {
   final Movie episode;
   const _EpisodeTile({required this.episode});
+
+  @override
+  State<_EpisodeTile> createState() => _EpisodeTileState();
+}
+
+class _EpisodeTileState extends State<_EpisodeTile> {
+  late final FocusNode focusNode = FocusNode(debugLabel: widget.episode.title);
+
+  @override
+  void dispose() {
+    focusNode.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
-        MovieTile(movie: episode, focusNode: FocusNode(), onPressed: () {}),
+        MovieTile(
+            movie: widget.episode, focusNode: focusNode, onPressed: () {}),
         SizedBox(
           width: 16,
         ),
@@ -169,7 +236,7 @@ class _EpisodeTile extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                episode.title,
+                widget.episode.title,
                 style: const TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w500,
@@ -177,7 +244,7 @@ class _EpisodeTile extends StatelessWidget {
               ),
               const SizedBox(height: 4),
               Text(
-                episode.description,
+                widget.episode.description,
                 style: const TextStyle(
                   fontSize: 14,
                   fontWeight: FontWeight.w300,

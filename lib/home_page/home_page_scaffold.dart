@@ -108,8 +108,6 @@ class _HomePageScaffoldState extends State<HomePageScaffold> {
                 setState(() {
                   _selectedIndex = index;
                   final targetScopeNode = rightPanelScopeNodes[_selectedIndex];
-
-                  print(targetScopeNode.focusedChild);
                   targetScopeNode.requestFocus();
                 });
               },
