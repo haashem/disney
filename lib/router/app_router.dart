@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 class AppRouter {
-  static const String profileSelection = 'profile-selection';
+  static const String profileSelection = '/profile-selection';
   static const String playback = 'playback';
   static const String showPage = 'showpage';
   static const String search = 'search';
@@ -16,46 +16,50 @@ class AppRouter {
 
   // Add more routes as needed
 
-  static final GoRouter router =
-      GoRouter(debugLogDiagnostics: true, routes: <RouteBase>[
-    GoRoute(
-      path: '/',
-      builder: (BuildContext context, GoRouterState state) {
-        return const ProfileSelectionPage();
-      },
-    ),
-    GoRoute(
-      path: '/home',
-      builder: (BuildContext context, GoRouterState state) {
-        return const HomePageScaffold();
-      },
+  static final GoRouter router = GoRouter(
+      debugLogDiagnostics: true,
+      initialLocation: profileSelection,
+     
       routes: <RouteBase>[
+         GoRoute(
+          path: profileSelection,
+          builder: (BuildContext context, GoRouterState state) {
+            return const ProfileSelectionPage();
+          },
+        ),
         GoRoute(
-            path: showPage,
-            builder: (BuildContext context, GoRouterState state) {
-              return ShowPage(
-                movie:
-                    categories.expand((element) => element.movies).firstWhere(
+          path: '/',
+          builder: (BuildContext context, GoRouterState state) {
+            return const HomePageScaffold();
+          },
+          routes: <RouteBase>[
+            GoRoute(
+                path: showPage,
+                builder: (BuildContext context, GoRouterState state) {
+                  return ShowPage(
+                    movie: categories
+                        .expand((element) => element.movies)
+                        .firstWhere(
                           (movie) => movie.title
                               .contains(state.uri.queryParameters['movie']!),
                         ),
-              );
-            },
-            routes: [
-              GoRoute(
-                path: playback,
-                builder: (BuildContext context, GoRouterState state) {
-                  return const PlaybackPage();
+                  );
                 },
-              ),
-            ]),
-        GoRoute(
-          path: search,
-          builder: (BuildContext context, GoRouterState state) {
-            return const SearchPage();
-          },
+                routes: [
+                  GoRoute(
+                    path: playback,
+                    builder: (BuildContext context, GoRouterState state) {
+                      return const PlaybackPage();
+                    },
+                  ),
+                ]),
+            GoRoute(
+              path: search,
+              builder: (BuildContext context, GoRouterState state) {
+                return const SearchPage();
+              },
+            ),
+          ],
         ),
-      ],
-    ),
-  ]);
+      ]);
 }

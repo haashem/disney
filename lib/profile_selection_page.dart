@@ -28,12 +28,12 @@ class ProfileSelectionPage extends StatelessWidget {
                     name: 'Minnie',
                     imageUrl: 'assets/images/profile/02.png',
                     autoFocus: true,
-                    onPressed: () => context.go('/home')),
+                    onPressed: () => context.go('/')),
                 ProfileAvatar(
                     name: 'Mickey',
                     imageUrl: 'assets/images/profile/01.png',
                     autoFocus: false,
-                    onPressed: () => context.go('/home'))
+                    onPressed: () => context.go('/'))
               ],
             ),
           ],
