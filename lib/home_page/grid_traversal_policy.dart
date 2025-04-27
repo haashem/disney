@@ -3,7 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
-class BrowseTraversalPolicy extends ReadingOrderTraversalPolicy {
+class GridTraversalPolicy extends ReadingOrderTraversalPolicy {
   static int _verticalCompare(Offset target, Offset a, Offset b) {
     return (a.dy - target.dy).abs().compareTo((b.dy - target.dy).abs());
   }

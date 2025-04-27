@@ -1,4 +1,4 @@
-import 'package:disney/home_page/browse_traversal_policy.dart';
+import 'package:disney/home_page/grid_traversal_policy.dart';
 import 'package:disney/home_page/home_page.dart';
 
 import 'package:disney/search_page.dart';
@@ -56,10 +56,11 @@ class _HomePageScaffoldState extends State<HomePageScaffold> {
                           if (event is KeyUpEvent) {
                             return KeyEventResult.handled;
                           }
-                          if (event.logicalKey != LogicalKeyboardKey.arrowLeft) {
+                          if (event.logicalKey !=
+                              LogicalKeyboardKey.arrowLeft) {
                             return KeyEventResult.ignored;
                           }
-        
+
                           if (!_searchPageScopeNode
                               .focusInDirection(TraversalDirection.left)) {
                             _sideMenuScopeNode.requestFocus();
@@ -68,7 +69,7 @@ class _HomePageScaffoldState extends State<HomePageScaffold> {
                         },
                         child: SearchPage()),
                     FocusTraversalGroup(
-                      policy: BrowseTraversalPolicy(),
+                      policy: GridTraversalPolicy(),
                       child: FocusScope(
                         node: _homePageScopeNode,
                         autofocus: true,
@@ -77,10 +78,11 @@ class _HomePageScaffoldState extends State<HomePageScaffold> {
                           if (event is KeyUpEvent) {
                             return KeyEventResult.handled;
                           }
-                          if (event.logicalKey != LogicalKeyboardKey.arrowLeft) {
+                          if (event.logicalKey !=
+                              LogicalKeyboardKey.arrowLeft) {
                             return KeyEventResult.ignored;
                           }
-        
+
                           if (!_homePageScopeNode
                               .focusInDirection(TraversalDirection.left)) {
                             _sideMenuScopeNode.requestFocus();
@@ -102,7 +104,7 @@ class _HomePageScaffoldState extends State<HomePageScaffold> {
                 if (event is KeyUpEvent &&
                     event.logicalKey == LogicalKeyboardKey.arrowRight) {
                   rightPanelScopeNodes[_selectedIndex].requestFocus();
-        
+
                   return KeyEventResult.handled;
                 }
                 return KeyEventResult.ignored;
@@ -113,7 +115,8 @@ class _HomePageScaffoldState extends State<HomePageScaffold> {
                 onItemSelected: (int index) {
                   setState(() {
                     _selectedIndex = index;
-                    final targetScopeNode = rightPanelScopeNodes[_selectedIndex];
+                    final targetScopeNode =
+                        rightPanelScopeNodes[_selectedIndex];
                     targetScopeNode.requestFocus();
                   });
                 },
