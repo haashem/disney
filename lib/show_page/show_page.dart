@@ -51,12 +51,12 @@ class _ShowPageState extends State<ShowPage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SizedBox(height: 64),
+                  SizedBox(height: 112),
                   Image.asset(
                     widget.movie.titleImageUrl,
                     scale: 2.5,
                   ),
-                  SizedBox(height: 8),
+                  SizedBox(height: 16),
                   Text(
                     widget.movie.yearAndCategory,
                     style: const TextStyle(
@@ -71,7 +71,7 @@ class _ShowPageState extends State<ShowPage> {
                       style: Theme.of(context).textTheme.bodyLarge,
                     ),
                   ),
-                  SizedBox(height: 24),
+                  SizedBox(height: 32),
                   Row(
                     children: [
                       FilledButton(
@@ -108,7 +108,7 @@ class _ShowPageState extends State<ShowPage> {
         AnimatedPositioned(
             curve: Curves.easeInOut,
             duration: const Duration(milliseconds: 300),
-            top: backdropIsVisible ? stackSize.height * 0.75 : 0.0,
+            top: backdropIsVisible ? stackSize.height * 0.85 : 0.0,
             width: stackSize.width,
             height: stackSize.height,
             child: ExtraPane(
