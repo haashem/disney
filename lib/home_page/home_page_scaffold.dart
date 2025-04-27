@@ -34,86 +34,93 @@ class _HomePageScaffoldState extends State<HomePageScaffold> {
   Widget build(BuildContext context) {
     return Material(
       color: Color(0xFF1a1c28),
-      child: Stack(
-        children: [
-          Row(
-            children: [
-              SizedBox(
-                width: 74,
-              ),
-              Expanded(
-                child: IndexedStack(index: _selectedIndex, children: [
-                  FocusScope(
-                      node: _searchPageScopeNode,
-                      skipTraversal: true,
-                      onKeyEvent: (node, event) {
-                        if (event is KeyUpEvent) {
-                          return KeyEventResult.handled;
-                        }
-                        if (event.logicalKey != LogicalKeyboardKey.arrowLeft) {
-                          return KeyEventResult.ignored;
-                        }
-
-                        if (!_searchPageScopeNode
-                            .focusInDirection(TraversalDirection.left)) {
-                          _sideMenuScopeNode.requestFocus();
-                        }
-                        return KeyEventResult.handled;
-                      },
-                      child: SearchPage()),
-                  FocusTraversalGroup(
-                    policy: BrowseTraversalPolicy(),
-                    child: FocusScope(
-                      node: _homePageScopeNode,
-                      autofocus: true,
-                      skipTraversal: true,
-                      onKeyEvent: (node, event) {
-                        if (event is KeyUpEvent) {
-                          return KeyEventResult.handled;
-                        }
-                        if (event.logicalKey != LogicalKeyboardKey.arrowLeft) {
-                          return KeyEventResult.ignored;
-                        }
-
-                        if (!_homePageScopeNode
-                            .focusInDirection(TraversalDirection.left)) {
-                          _sideMenuScopeNode.requestFocus();
-                        }
-                        return KeyEventResult.handled;
-                      },
-                      child: HomePage(),
-                    ),
-                  ),
-                  WatchListPage(),
-                ]),
-              ),
-            ],
+      child: Actions(
+        actions: {
+          DismissIntent: CallbackAction<DismissIntent>(
+            onInvoke: (intent) => _sideMenuScopeNode.requestFocus(),
           ),
-          FocusScope(
-            node: _sideMenuScopeNode,
-            skipTraversal: true,
-            onKeyEvent: (node, event) {
-              if (event is KeyUpEvent &&
-                  event.logicalKey == LogicalKeyboardKey.arrowRight) {
-                rightPanelScopeNodes[_selectedIndex].requestFocus();
-
-                return KeyEventResult.handled;
-              }
-              return KeyEventResult.ignored;
-            },
-            child: SideMenu(
-              focusNode: _sideMenuScopeNode,
-              selectedIndex: _selectedIndex,
-              onItemSelected: (int index) {
-                setState(() {
-                  _selectedIndex = index;
-                  final targetScopeNode = rightPanelScopeNodes[_selectedIndex];
-                  targetScopeNode.requestFocus();
-                });
-              },
+        },
+        child: Stack(
+          children: [
+            Row(
+              children: [
+                SizedBox(
+                  width: 74,
+                ),
+                Expanded(
+                  child: IndexedStack(index: _selectedIndex, children: [
+                    FocusScope(
+                        node: _searchPageScopeNode,
+                        skipTraversal: true,
+                        onKeyEvent: (node, event) {
+                          if (event is KeyUpEvent) {
+                            return KeyEventResult.handled;
+                          }
+                          if (event.logicalKey != LogicalKeyboardKey.arrowLeft) {
+                            return KeyEventResult.ignored;
+                          }
+        
+                          if (!_searchPageScopeNode
+                              .focusInDirection(TraversalDirection.left)) {
+                            _sideMenuScopeNode.requestFocus();
+                          }
+                          return KeyEventResult.handled;
+                        },
+                        child: SearchPage()),
+                    FocusTraversalGroup(
+                      policy: BrowseTraversalPolicy(),
+                      child: FocusScope(
+                        node: _homePageScopeNode,
+                        autofocus: true,
+                        skipTraversal: true,
+                        onKeyEvent: (node, event) {
+                          if (event is KeyUpEvent) {
+                            return KeyEventResult.handled;
+                          }
+                          if (event.logicalKey != LogicalKeyboardKey.arrowLeft) {
+                            return KeyEventResult.ignored;
+                          }
+        
+                          if (!_homePageScopeNode
+                              .focusInDirection(TraversalDirection.left)) {
+                            _sideMenuScopeNode.requestFocus();
+                          }
+                          return KeyEventResult.handled;
+                        },
+                        child: HomePage(),
+                      ),
+                    ),
+                    WatchListPage(),
+                  ]),
+                ),
+              ],
             ),
-          )
-        ],
+            FocusScope(
+              node: _sideMenuScopeNode,
+              skipTraversal: true,
+              onKeyEvent: (node, event) {
+                if (event is KeyUpEvent &&
+                    event.logicalKey == LogicalKeyboardKey.arrowRight) {
+                  rightPanelScopeNodes[_selectedIndex].requestFocus();
+        
+                  return KeyEventResult.handled;
+                }
+                return KeyEventResult.ignored;
+              },
+              child: SideMenu(
+                focusNode: _sideMenuScopeNode,
+                selectedIndex: _selectedIndex,
+                onItemSelected: (int index) {
+                  setState(() {
+                    _selectedIndex = index;
+                    final targetScopeNode = rightPanelScopeNodes[_selectedIndex];
+                    targetScopeNode.requestFocus();
+                  });
+                },
+              ),
+            )
+          ],
+        ),
       ),
     );
   }

@@ -1,5 +1,5 @@
 import 'package:disney/home_page/carousel/page_indicator.dart';
-import 'package:disney/movies/movie.dart';
+import 'package:disney/models/movie.dart';
 import 'package:flutter/material.dart';
 
 class Carousel extends StatefulWidget {

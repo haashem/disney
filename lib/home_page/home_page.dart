@@ -1,7 +1,7 @@
 import 'package:disney/home_page/carousel/carousel.dart';
 import 'package:disney/home_page/sections/list_section.dart';
 import 'package:disney/home_page/sections/movies_list_view.dart';
-import 'package:disney/movies/movie.dart';
+import 'package:disney/models/movie.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {

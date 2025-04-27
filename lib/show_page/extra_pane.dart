@@ -1,6 +1,6 @@
 import 'dart:ui';
 
-import 'package:disney/movies/movie.dart';
+import 'package:disney/models/movie.dart';
 import 'package:disney/show_page/episodes_tab.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
