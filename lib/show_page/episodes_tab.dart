@@ -126,6 +126,7 @@ class _EpisodesTabState extends State<EpisodesTab> {
                 return KeyEventResult.handled;
               },
               child: ListView.separated(
+                  padding: const EdgeInsets.all(16),
                   itemCount: seasons[selectedSeasonIndex].length,
                   separatorBuilder: (context, index) => const SizedBox(
                         height: 16,
