@@ -74,7 +74,6 @@ class _HomePageScaffoldState extends State<HomePageScaffold> {
             ),
             FocusScope(
               node: _sideMenuScopeNode,
-              skipTraversal: true,
               onKeyEvent: (node, event) {
                 return _focusOnMainPanel(event);
               },
@@ -116,7 +115,11 @@ class _HomePageScaffoldState extends State<HomePageScaffold> {
     }
 
     if (!node.focusInDirection(TraversalDirection.left)) {
-      _sideMenuScopeNode.requestFocus();
+      if (_sideMenuScopeNode.focusedChild == null) {
+        _sideMenuScopeNode.focusInDirection(TraversalDirection.left);
+      } else {
+        _sideMenuScopeNode.requestFocus();
+      }
     }
     return KeyEventResult.handled;
   }
