@@ -38,7 +38,6 @@ class _EpisodesTabState extends State<EpisodesTab> {
       child: Row(
         children: [
           FocusScope(
-            skipTraversal: true,
             node: _seasonsFocusNode,
             onFocusChange: (isFocused) {
               if (isFocused) {
@@ -142,6 +141,11 @@ class _EpisodesTabState extends State<EpisodesTab> {
 
   void _focusOnTheFirstEpisode() {
     _episodesFocusNode.requestFocus(_episodesFocusNode.children.first);
+    Scrollable.ensureVisible(
+      _episodesFocusNode.focusedChild!.context!,
+      duration: const Duration(milliseconds: 200),
+      curve: Curves.easeInOut,
+    );
   }
 }
 
