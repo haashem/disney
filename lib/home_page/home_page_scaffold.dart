@@ -51,43 +51,18 @@ class _HomePageScaffoldState extends State<HomePageScaffold> {
                   child: IndexedStack(index: _selectedIndex, children: [
                     FocusScope(
                         node: _searchPageScopeNode,
-                        skipTraversal: true,
                         onKeyEvent: (node, event) {
-                          if (event is KeyUpEvent) {
-                            return KeyEventResult.handled;
-                          }
-                          if (event.logicalKey !=
-                              LogicalKeyboardKey.arrowLeft) {
-                            return KeyEventResult.ignored;
-                          }
-
-                          if (!_searchPageScopeNode
-                              .focusInDirection(TraversalDirection.left)) {
-                            _sideMenuScopeNode.requestFocus();
-                          }
-                          return KeyEventResult.handled;
+                          return _focusOnSideMenuIfNeeded(
+                              rightPanelScopeNodes[_selectedIndex], event);
                         },
                         child: SearchPage()),
                     FocusTraversalGroup(
                       policy: GridTraversalPolicy(),
                       child: FocusScope(
                         node: _homePageScopeNode,
-                        autofocus: true,
-                        skipTraversal: true,
                         onKeyEvent: (node, event) {
-                          if (event is KeyUpEvent) {
-                            return KeyEventResult.handled;
-                          }
-                          if (event.logicalKey !=
-                              LogicalKeyboardKey.arrowLeft) {
-                            return KeyEventResult.ignored;
-                          }
-
-                          if (!_homePageScopeNode
-                              .focusInDirection(TraversalDirection.left)) {
-                            _sideMenuScopeNode.requestFocus();
-                          }
-                          return KeyEventResult.handled;
+                          return _focusOnSideMenuIfNeeded(
+                              rightPanelScopeNodes[_selectedIndex], event);
                         },
                         child: HomePage(),
                       ),
@@ -101,13 +76,7 @@ class _HomePageScaffoldState extends State<HomePageScaffold> {
               node: _sideMenuScopeNode,
               skipTraversal: true,
               onKeyEvent: (node, event) {
-                if (event is KeyUpEvent &&
-                    event.logicalKey == LogicalKeyboardKey.arrowRight) {
-                  rightPanelScopeNodes[_selectedIndex].requestFocus();
-
-                  return KeyEventResult.handled;
-                }
-                return KeyEventResult.ignored;
+                return _focusOnMainPanel(event);
               },
               child: SideMenu(
                 focusNode: _sideMenuScopeNode,
@@ -127,22 +96,28 @@ class _HomePageScaffoldState extends State<HomePageScaffold> {
       ),
     );
   }
+
+  KeyEventResult _focusOnMainPanel(KeyEvent event) {
+    if (event is KeyUpEvent &&
+        event.logicalKey == LogicalKeyboardKey.arrowRight) {
+      rightPanelScopeNodes[_selectedIndex].requestFocus();
+
+      return KeyEventResult.handled;
+    }
+    return KeyEventResult.ignored;
+  }
+
+  KeyEventResult _focusOnSideMenuIfNeeded(FocusScopeNode node, KeyEvent event) {
+    if (event is KeyUpEvent) {
+      return KeyEventResult.handled;
+    }
+    if (event.logicalKey != LogicalKeyboardKey.arrowLeft) {
+      return KeyEventResult.ignored;
+    }
+
+    if (!node.focusInDirection(TraversalDirection.left)) {
+      _sideMenuScopeNode.requestFocus();
+    }
+    return KeyEventResult.handled;
+  }
 }
-
-// /// An [Action] that moves the focus to the focusable node in the direction
-// /// configured by the associated [DirectionalFocusIntent.direction].
-// ///
-// /// This is the [Action] associated with [DirectionalFocusIntent] and bound by
-// /// default to the [LogicalKeyboardKey.arrowUp], [LogicalKeyboardKey.arrowDown],
-// /// [LogicalKeyboardKey.arrowLeft], and [LogicalKeyboardKey.arrowRight] keys in
-// /// the [WidgetsApp], with the appropriate associated directions.
-// class DirectionalFocusAction2 extends Action<DirectionalFocusIntent> {
-//   /// Creates a [DirectionalFocusAction].
-//   DirectionalFocusAction2();
-
-//   @override
-//   void invoke(DirectionalFocusIntent intent) {
-//     print(intent);
-//     primaryFocus!.focusInDirection(intent.direction);
-//   }
-// }
