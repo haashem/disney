@@ -75,7 +75,7 @@ class _EpisodesTabState extends State<EpisodesTab> {
                     onPressed: () {
                       setState(() {
                         selectedSeasonIndex = 0;
-                        _focusToTheFirstEpisode();
+                        _focusOnTheFirstEpisode();
                       });
                     },
                   ),
@@ -86,7 +86,7 @@ class _EpisodesTabState extends State<EpisodesTab> {
                     onPressed: () {
                       setState(() {
                         selectedSeasonIndex = 1;
-                        _focusToTheFirstEpisode();
+                        _focusOnTheFirstEpisode();
                       });
                     },
                   ),
@@ -97,7 +97,7 @@ class _EpisodesTabState extends State<EpisodesTab> {
                     onPressed: () {
                       setState(() {
                         selectedSeasonIndex = 2;
-                        _focusToTheFirstEpisode();
+                        _focusOnTheFirstEpisode();
                       });
                     },
                   ),
@@ -139,7 +139,7 @@ class _EpisodesTabState extends State<EpisodesTab> {
     );
   }
 
-  void _focusToTheFirstEpisode() {
+  void _focusOnTheFirstEpisode() {
     _episodesFocusNode.requestFocus(_episodesFocusNode.children.first);
   }
 }
