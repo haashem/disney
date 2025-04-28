@@ -195,10 +195,14 @@ class _SeasonButton extends StatelessWidget {
           }
           return Colors.white54;
         }),
-        textStyle: WidgetStatePropertyAll(
-          const TextStyle(
-              fontSize: 20, fontWeight: FontWeight.w300, letterSpacing: 1),
-        ),
+        textStyle: WidgetStateProperty.resolveWith((states) {
+          if (isSelected || states.contains(WidgetState.focused)) {
+            return Theme.of(context).textTheme.bodyLarge?.copyWith(
+                  fontWeight: FontWeight.w600,
+                );
+          }
+          return Theme.of(context).textTheme.bodyLarge;
+        }),
       ),
       child: Text(title),
     );
