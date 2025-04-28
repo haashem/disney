@@ -25,6 +25,7 @@ class _SearchPageState extends State<SearchPage> {
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: TextField(
               controller: textFieldController,
+              canRequestFocus: false,
               decoration: InputDecoration(
                 filled: true,
                 fillColor: Colors.white10,
