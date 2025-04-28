@@ -160,12 +160,11 @@ class _VideoPlayerControlsState extends State<VideoPlayerControls> {
   @override
   Widget build(BuildContext context) {
     return FocusableActionDetector(
-      autofocus: true,
       shortcuts: {
         SingleActivator(LogicalKeyboardKey.escape): const DismissIntent(),
         SingleActivator(LogicalKeyboardKey.arrowLeft): const RewindIntent(),
         SingleActivator(LogicalKeyboardKey.arrowRight): const ForwardIntent(),
-        SingleActivator(LogicalKeyboardKey.space): const PlayPauseIntent(),
+        SingleActivator(LogicalKeyboardKey.select): const PlayPauseIntent(),
         SingleActivator(LogicalKeyboardKey.arrowUp):
             const IncreaseVolumeIntent(),
         SingleActivator(LogicalKeyboardKey.arrowDown):
@@ -184,16 +183,16 @@ class _VideoPlayerControlsState extends State<VideoPlayerControls> {
         PlayPauseIntent: CallbackAction<PlayPauseIntent>(
           onInvoke: (intent) => togglePlayback(),
         ),
-        IncreaseVolumeIntent: CallbackAction<IncreaseVolumeIntent>(
-          onInvoke: (intent) => changeVolume(
-            (controller.value.volume + 0.1).clamp(0.0, 1.0),
-          ),
-        ),
-        DecreaseVolumeIntent: CallbackAction<DecreaseVolumeIntent>(
-          onInvoke: (intent) => changeVolume(
-            (controller.value.volume - 0.1).clamp(0.0, 1.0),
-          ),
-        ),
+        // IncreaseVolumeIntent: CallbackAction<IncreaseVolumeIntent>(
+        //   onInvoke: (intent) => changeVolume(
+        //     (controller.value.volume + 0.1).clamp(0.0, 1.0),
+        //   ),
+        // ),
+        // DecreaseVolumeIntent: CallbackAction<DecreaseVolumeIntent>(
+        //   onInvoke: (intent) => changeVolume(
+        //     (controller.value.volume - 0.1).clamp(0.0, 1.0),
+        //   ),
+        // ),
       },
       child: SafeArea(
         child: Column(
@@ -203,6 +202,7 @@ class _VideoPlayerControlsState extends State<VideoPlayerControls> {
               controller: widget.controller,
             ),
             IconButton(
+              autofocus: true,
               icon: Icon(
                   size: 40,
                   controller.value.isPlaying ? Icons.pause : Icons.play_arrow),
@@ -217,13 +217,6 @@ class _VideoPlayerControlsState extends State<VideoPlayerControls> {
             SizedBox(
               height: 16,
             ),
-            // IconButton(
-            //   icon: const Icon(Icons.stop),
-            //   onPressed: () {
-            //     controller.seekTo(Duration.zero);
-            //     controller.pause();
-            //   },
-            // ),
           ],
         ),
       ),
