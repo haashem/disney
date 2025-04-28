@@ -37,7 +37,7 @@ class _ExtraPaneState extends State<ExtraPane> {
         },
         focusNode: _focusNode,
         shortcuts: {
-          SingleActivator(LogicalKeyboardKey.escape): const DismissIntent(),
+          SingleActivator(LogicalKeyboardKey.goBack): const DismissIntent(),
         },
         actions: {
           DismissIntent: CallbackAction<DismissIntent>(

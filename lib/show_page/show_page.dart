@@ -129,18 +129,9 @@ class _ShowPageState extends State<ShowPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        // appBar: AppBar(
-        //   title: const Text('Show Page'),
-        //   // leading: IconButton(
-        //   //   icon: const Icon(Icons.arrow_back),
-        //   //   onPressed: () => Navigator.of(context).pop(),
-        //   // ),
-
-        // ),
         body: FocusableActionDetector(
-      focusNode: FocusNode(skipTraversal: true),
       shortcuts: {
-        SingleActivator(LogicalKeyboardKey.escape): const DismissIntent(),
+        SingleActivator(LogicalKeyboardKey.goBack): const DismissIntent(),
       },
       actions: {
         DismissIntent: CallbackAction<DismissIntent>(
