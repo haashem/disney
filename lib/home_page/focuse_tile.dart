@@ -7,7 +7,6 @@ class IntereactiveTile extends StatefulWidget {
 
   const IntereactiveTile({
     super.key,
-
     this.focusNode,
     required this.imageUrl,
     required this.onPressed,
@@ -17,12 +16,14 @@ class IntereactiveTile extends StatefulWidget {
   State<IntereactiveTile> createState() => _IntereactiveTileState();
 }
 
-class _IntereactiveTileState extends State<IntereactiveTile> {
+class _IntereactiveTileState extends State<IntereactiveTile>
+    with AutomaticKeepAliveClientMixin {
   bool isFocused = false;
   bool isHovered = false;
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return AnimatedScale(
       scale: isFocused || isHovered ? 1.05 : 1,
       duration: Duration(milliseconds: 300),
@@ -68,4 +69,7 @@ class _IntereactiveTileState extends State<IntereactiveTile> {
       ),
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }
