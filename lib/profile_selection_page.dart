@@ -62,8 +62,8 @@ class ProfileAvatar extends StatefulWidget {
 }
 
 class _ProfileAvatarState extends State<ProfileAvatar> {
-  late bool isSelected = widget.autoFocus;
-
+  late bool isFocused = widget.autoFocus;
+  
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -73,7 +73,7 @@ class _ProfileAvatarState extends State<ProfileAvatar> {
           autofocus: widget.autoFocus,
           onFocusChange: (value) {
             setState(() {
-              isSelected = value;
+              isFocused = value;
             });
           },
           style: ButtonStyle(
@@ -89,13 +89,13 @@ class _ProfileAvatarState extends State<ProfileAvatar> {
               }
               return null;
             }),
+            backgroundBuilder: (context, states, child) {
+              return AnimatedScale(
+                  scale: isFocused ? 1.1 : 1,
+                  duration: Duration(milliseconds: 200),
+                  child: child);
+            },
           ),
-
-          // ElevatedButton.styleFrom(
-          //   backgroundColor: isSelected ? Colors.blue : Colors.grey,
-          //   shape: const CircleBorder(),
-          //   padding: const EdgeInsets.all(8),
-          // ),
           child: ClipOval(
             child: Image.asset(
               widget.imageUrl,
@@ -110,7 +110,7 @@ class _ProfileAvatarState extends State<ProfileAvatar> {
           widget.name,
           style: Theme.of(context).textTheme.titleLarge?.copyWith(
                 color: Colors.white,
-                fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+                fontWeight: isFocused ? FontWeight.bold : FontWeight.normal,
               ),
         ),
       ],
